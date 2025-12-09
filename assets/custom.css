@@ -91,11 +91,33 @@ pre > code {
   /* 原为 52.5%，改为 100% 以适应父容器 */
   font-size: 1.2rem;
   /* 原为 0.9rem，增大字体 */
+  line-height: 1.5; /* 显式设置行高以对齐行号 */
   margin-left: 0%;
   background-color: transparent;
   /* 避免代码块内重复背景 */
   padding: 0;
   border: none;
+}
+
+/* 行号样式 */
+pre.has-line-numbers {
+  display: flex;
+  align-items: flex-start;
+}
+
+.line-numbers-rows {
+  display: flex;
+  flex-direction: column;
+  padding-right: 0.8em;
+  margin-right: 0.8em;
+  border-right: 1px solid #ddd;
+  color: #aaa;
+  user-select: none;
+  text-align: right;
+  min-width: 2em;
+  font-size: 1.2rem; /* 匹配代码字体大小 */
+  line-height: 1.5;  /* 匹配代码行高 */
+  font-family: monospace; /* 确保字体一致 */
 }
 
 /* 调整行内代码大小及样式 */

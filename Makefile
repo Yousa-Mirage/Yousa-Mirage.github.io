@@ -14,7 +14,7 @@ html: $(HTML_FILES) assets
 _site/%.html: content/%.typ
 	@mkdir -p $(@D)
 	typst compile --root .. --font-path assets --features html --format html $< $@
-	@sed -i 's|</head>|<link rel="icon" href="/assets/favicon.ico"><script src="/assets/copy-code.js"></script><script src="/assets/format-headings.js"></script></head>|' $@
+	@sed -i 's|</head>|<link rel="icon" href="/assets/favicon.ico"><script src="/assets/copy-code.js"></script><script src="/assets/line-numbers.js"></script><script src="/assets/format-headings.js"></script></head>|' $@
 
 assets:
 	@mkdir -p _site/assets
