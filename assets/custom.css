@@ -108,15 +108,15 @@ pre.has-line-numbers {
 .line-numbers-rows {
   display: flex;
   flex-direction: column;
-  padding-right: 0.8em;
-  margin-right: 0.8em;
+  padding-right: 0.4em;
+  margin-right: 0.4em;
   border-right: 1px solid #ddd;
   color: #aaa;
   user-select: none;
   text-align: right;
-  min-width: 2em;
+  min-width: 1.2em;
   font-size: 1.2rem; /* 匹配代码字体大小 */
-  line-height: 1.5;  /* 匹配代码行高 */
+  line-height: 1.5; /* 匹配代码行高 */
   font-family: monospace; /* 确保字体一致 */
 }
 
