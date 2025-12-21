@@ -22,9 +22,8 @@
   (
       pl.scan_parquet(FILE_PATH)
       .filter(pl.col("concepts").list.contains("人工智能"))
-      .select(pl.col("year").value_counts())
+      .select(pl.col("year").value_counts(sort=True))
       .unnest("year")
-      .sort("year")
       .collect()
   )
   ```
