@@ -34,4 +34,4 @@
 
 === 关于网站
 
-网站使用 #link("https://github.com/vsheg/tufted", "Tufted") 构建，这是一个基于 #link("https://typst.app/", "Typst") 的静态网站构建模板。
+网站魔改自 #link("https://github.com/vsheg/tufted", "Tufted")，这是一个基于 #link("https://typst.app/", "Typst") 的静态网站构建模板。
