@@ -9,28 +9,25 @@
 
 _*“煮啵煮啵，你的博客确实很漂亮，但写网站还是太吃操作了，有没有更加简单的模板可以直接用呢？”*_
 
-有的兄弟，有的。我基于 Typst 和 Tufte CSS 开发了一个网站模板项目—— #link("https://github.com/Yousa-Mirage/Tufted-Blog-Template")[_*Tufted Blog Template*_]！
+有的兄弟，有的。我基于 Typst 和 Tufted 开发了一个网站模板项目—— #link("https://github.com/Yousa-Mirage/Tufted-Blog-Template")[_*Tufted Blog Template*_]！
 
 我从我自己的网站中抽取出了这个完全面向小白的网站构建模板项目。不需要你懂 HTML、CSS、JavaScript，即使没有编程基础，只要你愿意花些时间了解几个新概念，简单了解和学习标记语言 Typst 后，你也能轻松拥有一个美观优雅的个人网站。
 
 GitHub 项目仓库：https://github.com/Yousa-Mirage/Tufted-Blog-Template\
-在线演示：https://tufted.vsheg.com/ 或 https://yousa-mirage.github.io
+在线演示：https://tufted.vsheg.com/ 或 https://yousa-mirage.github.io\
+网页中的本文：https://yousa-mirage.github.io/Blog/2025-12-31-website/
 
 
 == 为什么要用这个模板？
 
 - 🚀 使用 Typst 编写内容，简洁强大，编译极快
-- 🎨 基于 Tufte CSS 设计，极简主义、内容至上，提供清晰、沉浸的阅读体验
+- 🎨 基于 Tufte 样式设计，极简主义、内容至上，提供清晰、沉浸的阅读体验
 - 📦 内置基于 Python 的跨平台构建脚本，支持增量编译
 - 📝 支持生成 HTML 网页和 PDF 文档，支持链接到 PDF
 - 🌐 内置 GitHub Actions 工作流，一键部署网站
 - 📄 丰富的示例和文档，无需任何前置知识，快速上手
 
 === 什么是 Tufte 样式？
-
-#tufted.margin-note[
-  可访问 #link("https://tufted.vsheg.com/")[tufted.vsheg.com] 或 #link("https://yousa-mirage.github.io")[我的个人网站] 查看风格效果。
-]
 
 *Tufte 样式* 源于数据可视化大师 Edward Tufte 的设计理念，主张内容至上与极简主义，力求去除一切干扰信息的视觉杂音。
 
@@ -55,7 +52,7 @@ Typst 的语法非常接近自然语言。你想加个标题？写 `= 标题`。
 
 很多博客网站、教程和文档都陷入了“知识的诅咒”，它们常常会说“你*只*需要打开终端，运行这行命令，一切就都搞定了！”然而就这样简单的一句话，其实背后涉及相当多的概念、隐藏着相当多的坑。作者们已经不再把这些知识当做知识，从而忽略了相当多的人其实根本就不知道什么是终端。
 
-本项目的初衷就是降低技术复杂度，让计算机小白也能无障碍地使用。我知道，对于很多非计算机专业的同学来说，看到“终端”、“命令行”、“脚本”、“GitHub”这些词就会本能地害怕和抗拒。别害怕，为了解决这个问题，我编写了非常丰富的引导说明和帮助文档。整个工作流程大致如下：
+本项目的初衷就是降低技术复杂度，让计算机小白也能无障碍地使用。我知道，对于很多非技术背景的同学来说，看到“终端”、“命令行”、“脚本”、“GitHub”这些词就会本能地害怕和抗拒。别害怕，为了解决这个问题，我编写了非常丰富的引导说明和帮助文档。整个工作流程大致如下：
 
 === 准备环境
 
@@ -115,3 +112,4 @@ Tufted Blog Template 旨在为非技术背景的用户提供一个低门槛的�
 
 项目仓库：https://github.com/Yousa-Mirage/Tufted-Blog-Template\
 在线演示：https://tufted.vsheg.com/ 或 https://yousa-mirage.github.io
+
