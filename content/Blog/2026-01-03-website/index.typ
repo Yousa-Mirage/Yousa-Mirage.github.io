@@ -14,8 +14,7 @@ _*“煮啵煮啵，你的博客确实很漂亮，但写网站还是太吃操作
 不需要你懂 HTML、CSS、JavaScript，即使没有编程基础，只要你愿意花些时间了解几个新概念，简单了解和学习标记语言 Typst 后，你也能轻松拥有一个美观优雅的个人网站。
 
 GitHub 项目仓库：https://github.com/Yousa-Mirage/Tufted-Blog-Template\
-在线演示：https://tufted.vsheg.com/ 或 https://yousa-mirage.github.io\
-在网站阅读本文：https://yousa-mirage.github.io/Blog/2025-12-31-website/
+在线演示：https://tufted.vsheg.com/ 或 https://yousa-mirage.github.io
 
 
 == 为什么要用这个模板？
