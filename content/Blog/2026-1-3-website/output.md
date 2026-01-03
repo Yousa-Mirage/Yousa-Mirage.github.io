@@ -1,0 +1,202 @@
+## 零基础使用 Typst 搭建学术风个人网站
+
+<p align="center">
+
+<figure class="figure">
+
+<p><img src="devices.webp" alt="" /></p>
+
+
+</figure>
+
+</p>
+
+12 月我花了点时间重构了我的个人网站，并在组会上向大家展示了一下效果。大家在交口称赞的同时又表示：
+
+_**“煮啵煮啵，你的博客确实很漂亮，但写网站还是太吃操作了，有没有更加简单的模板可以直接用呢？”**_
+
+有的兄弟，有的。我基于 Typst 和 Tufted 开发了一个网站模板项目 —— [_**Tufted Blog Template**_](https://github.com/Yousa-Mirage/Tufted-Blog-Template)！
+
+不需要你懂 HTML、CSS、JavaScript，即使没有编程基础，只要你愿意花些时间了解几个新概念，简单了解和学习标记语言 Typst 后，你也能轻松拥有一个美观优雅的个人网站。
+
+GitHub 项目仓库：[https://github.com/Yousa-Mirage/Tufted-Blog-Template](https://github.com/Yousa-Mirage/Tufted-Blog-Template)\
+在线演示：[https://tufted.vsheg.com/](https://tufted.vsheg.com/) 或 [https://yousa-mirage.github.io](https://yousa-mirage.github.io)\
+在网站阅读本文：[https://yousa-mirage.github.io/Blog/2025-12-31-website/](https://yousa-mirage.github.io/Blog/2025-12-31-website/)
+
+### 为什么要用这个模板？
+
+- 🚀 使用 Typst 编写内容，简洁强大，编译极快
+- 🎨 基于 Tufte 样式设计，极简主义、内容至上，提供清晰、沉浸的阅读体验
+- 📦 内置基于 Python 的跨平台构建脚本，支持增量编译
+- 📝 支持生成 HTML 网页和 PDF 文档，支持链接到 PDF
+- 🌐 内置 GitHub Actions 工作流，一键部署网站
+- 📄 丰富的示例和文档，无需任何前置知识，快速上手
+
+#### 什么是 Tufte 样式？
+
+**Tufte 样式** 源于数据可视化大师 Edward Tufte 的设计理念，主张内容至上与极简主义，力求去除一切干扰信息的视觉杂音。
+
+其最鲜明的特点是采用**宽大的侧边栏布局**，你的注释、参考文献甚至图片，不再挤在正文里或者丢在页脚，而是优雅地展示在正文旁边的宽边栏里，阅读体验极佳，避免为了阅读注释和参考文献等内容而不得不频繁上下翻动页面。
+
+配合优雅的**衬线字体**与**类纸张背景**，Tufte 风格在数字屏幕上复刻了如阅读纸质著作般清晰、优雅、沉浸的阅读体验。
+
+<p align="center">
+
+<figure class="figure">
+
+<p><img src="博客样例.png" alt="" /></p>
+
+
+</figure>
+
+</p>
+
+（当然，现在借助 AI，也能够通过修改 CSS 轻松对样式进行任何调整，甚至完全使用你自己的自定义样式。）
+
+#### 什么是 Typst？
+
+传统的网站开发要么需要你同时学会 HTML（结构）、CSS（样式）和 JavaScript（交互），要么使用 Hugo 等基于 Markdown 的模板工具，功能有限。
+
+但在这个模板里，你只需要写 Typst，一种比 LaTeX 更简单、比 Markdown 更强大的排版语言。我们利用它实验性的 HTML 导出功能来编译网页。
+
+Typst 是一个新兴的、现代化的标记语言排版系统，由 Rust 编写，可以输出 PDF、HTML 等丰富的文档格式。它旨在成为 LaTeX 的现代化替代品，简单易学、编译极快、使用友好，能够轻松实现极为精美和丰富的排版效果。
+
+标记语言非常易于上手。你想加个标题？写 `= 标题`。想加个编号列表？写 `+ 列表项1`。想添加个图片？直接写 `#image(你的图片文件)`（虽然这在 Typst 中已不算标记模式了）。使用标记语言编写内容，可以让你专注于内容本身，而不是纠结排版细节。
+
+（煮啵的日常写作已经 All in Typst 了，用 Typst 写论文、写笔记、写作业、写博客、做 PPT…）
+
+<p align="center">
+
+<figure class="figure">
+
+<p><img src="zed.png" alt="" /></p>
+
+
+</figure>
+
+</p>
+
+### 快速上手——克服你的“技术恐惧症”
+
+很多博客网站、教程和文档都陷入了“知识的诅咒”，它们常常会说“你**只**需要打开终端，运行这行命令，一切就都搞定了！”然而就这样简单的一句话，其实背后涉及相当多的概念、隐藏着相当多的坑。作者们对这些知识已习以为常，从而忽略了相当多的人其实根本就不知道什么是终端。
+
+本项目的初衷就是降低技术复杂度，让计算机小白也能无障碍地使用。我知道，对于很多非技术背景的同学来说，看到“终端”、“命令行”、“脚本”、“GitHub”这些词就会本能地害怕和抗拒。为了解决这个问题，我编写了非常丰富的引导说明和帮助文档。
+
+<p align="center">
+
+<figure class="figure">
+
+<p><img src="wiki.png" alt="" /></p>
+
+
+</figure>
+
+</p>
+
+整个工作流程大致如下：
+
+```plaintext
+使用模板创建你的 GitHub 仓库 
+  ↓
+将你的仓库克隆到本地
+  ↓
+修改 .typ 文件
+  ↓
+运行 build.py
+  ↓
+本地预览（preview）
+  ↓
+满意后 git push 到你的 GitHub 仓库
+  ↓
+GitHub Actions 自动部署
+  ↓
+访问 username.github.io
+```
+
+（具体用法和更详细的构建说明请访问 [项目仓库](https://github.com/Yousa-Mirage/Tufted-Blog-Template)）
+
+#### 准备环境
+
+这个模板只依赖 Typst 和 Python，Typst 是我们的核心排版引擎，Python 是为了自动构建和预览。
+
+（当然，你还需要能顺利访问 GitHub。）
+
+- _煮啵煮啵，你说的 Typst 和 Python 有没有安装教程啊？_
+  - 有的兄弟，有的。我在文档中已经写好了安装 Typst 的详细操作，现代的 uv 工具也能完全解决 Python 问题，你只需要在终端中运行一行命令就能全自动安装它。
+- _煮啵煮啵，你说的“在终端中运行”有没有详细说明啊？_
+  - 有的兄弟，有的。我在文档里写好了 **什么是终端、什么是工作路径、什么是 PATH 环境变量** 等内容，在所有你可能遇到陌生概念和坑的地方提供了相关链接，保证你不会因为“怎么打开终端”“找不到命令”这种问题被卡住。
+
+#### 使用模板创建自己的仓库
+
+打开这个项目的 GitHub 主页，点击 `Use this template`，使用这个模板创建你自己的网站仓库，然后把你自己的仓库克隆到本地。
+
+- _煮啵煮啵，我从来没用过 Git 和 GitHub，你能教教我吗？_
+  - 能的兄弟，能的。我在文档里写好了 什么是 Git、Git 怎么用，你只需要学会使用两个操作就行了：“提交”操作存档修改、“推送”操作上传修改。我还链接了我很喜欢的[“给傻子的Git教程”](https://www.bilibili.com/video/BV1Hkr7YYEh8)，还不会就看它！
+
+#### 构建和预览示例页面
+
+下载好后进入文件夹，打开终端，运行构建命令和预览命令，你就能在浏览器中看到我提供的示例页面了。
+
+- _煮啵煮啵，构建和预览网站听起来好复杂，有没有现成的傻瓜命令呢？_
+  - 有的兄弟，有的。我编写了一个 Python 脚本 `build.py`，你只需要打开你前面学到的终端，用你前面安装的 uv 或 Python 运行这俩命令：`uv run build.py build` 和 `uv run build.py preview`。然后你的 Typst 文档就全变成了网页，打开浏览器就能看到你的网站了。
+
+<p align="center">
+
+<figure class="figure">
+
+<p><img src="编译预览.png" alt="" /></p>
+
+
+</figure>
+
+</p>
+
+#### 像写文档一样写网页
+
+`content/` 文件夹中里面有很多 `.typ` 文件，这些就是我写的 Typst 示例文档。随便打开一个，试着改几个字，重新运行 `build` 命令。你会发现网页自动刷新了，变成了你修改后的样子！我在模板里留了很多现成的例子，你想改主页、写博客、放简历，直接照着样例写就行。
+
+例如，得益于 Typst 强大的排版能力和丰富的输出格式，你只需要简单编写就能创建一份排版精美的简历，然后既能生成方便阅读的网页版，又可同时提供排版固定、下载方便的 PDF 版。如果你著作等身，也可以为你的每篇发表都添加 PDF 文件链接，将 PDF 文件一并上传到网站，让读者轻松下载你的大作。
+
+- _煮啵煮啵，你说了半天 Typst，我完全不会写啊，有没有学习资料呢？_
+  - 有的兄弟，有的。我编写了“Typst 快速入门资料”和“Typst 功能速览与样例”两份文档，在里面详细介绍了 **什么是 Typst、为什么本项目使用 Typst、怎么快速学习 Typst** 等内容。你需要学习的 Typst 知识很少，简单学完这些知识就能使用 Typst 编写你自己的文档和网页了！此外，我已经把网站常用的功能都写在了“Typst 功能速览与样例”里，照着写就可以！
+
+#### 让全世界看到你的网站
+
+得益于 GitHub Actions 和 GitHub Pages，你不需要购买服务器或域名，就可以免费将你的网站自动发布在 `<your-github-name>.github.io` 这个网站上。
+
+<p align="center">
+
+<figure class="figure">
+
+<p><img src="pages.png" alt="" /></p>
+
+
+</figure>
+
+</p>
+
+- _煮啵煮啵，你说的 Actions、Pages 好复杂，有没有简单的用法啊？_
+  - 有的兄弟，有的。我已经准备好了 GitHub 工作流，还写好了关于 **如何使用 GitHub Pages 免费部署你的网站** 的文档。你只需要读一读，然后把你的文件上传（推送）到 GitHub，你的网站就会自动生成、部署、更新了。
+
+你需要独立进行的工作可能就只有 “注册 GitHub 账号” 和 “下载你自己喜欢的代码编辑器” 两项。注册账号，下载 VS Code，安装 Tinymist 扩展，打开你的网站项目。没有了，应该真的没有了！
+
+（即使你不使用本项目构建网站，这些文档和教程也能让你学到很多！学会 Typst 也能让你掌握一项强大的文字排版工具！）
+
+更具体的构建说明和文档，请阅读项目仓库中的 README 文档、 Wiki 文档和编译后的示例页面。
+
+### 总结
+
+开发 Tufted Blog Template 项目的初衷，就是因为我发现很多同学都希望拥有自己的个人网站、博客网站，或出于乐趣，或有现实需求，却被技术门槛或畏惧心理挡在了门外。
+
+碰巧地，我发现了 Tufted 包和 Tufte 风格，在简洁、美观、富有高级感的同时提供了极佳的阅读体验，非常适合构建学术向的个人网站。于是便有了我的网站，于是便有了这个模板项目。
+
+Tufted Blog Template 旨在为非技术背景的用户提供一个低门槛的建站方案。它屏蔽了复杂的底层技术细节，让你能够专注于最重要的事情——创作内容。
+
+如果你正在寻找一个简洁、易维护且具有学术质感的个人网站方案，不妨尝试一下。
+
+如果你喜欢这个模板项目，欢迎在 GitHub 中点个 Star，繁星点点尽在指尖🌟。
+
+如果你遇到**任何**问题，欢迎留言或在 GitHub 中提问、讨论和反馈。
+
+项目仓库：[https://github.com/Yousa-Mirage/Tufted-Blog-Template](https://github.com/Yousa-Mirage/Tufted-Blog-Template)\
+在线演示：[https://tufted.vsheg.com/](https://tufted.vsheg.com/) 或 [https://yousa-mirage.github.io](https://yousa-mirage.github.io)
