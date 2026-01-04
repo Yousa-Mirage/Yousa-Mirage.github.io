@@ -24,12 +24,13 @@
 
 最令人惊喜的应该是有 HR 来主动联系上自己。自己写的#link("../../Blog/2025-11-08-speed-test")[一篇公众号文章]获得了 7000+ 阅读，很高！然后有个人私信我要不要跳槽，他说他读到了我文章，感觉写得不错，然后发在了公司群里，得到了 CTO 的认可，然后 HR 就联系我了。然后我才发现原来是 #link("https://www.manjusaka.blog/")[Manjusaka]#tufted.margin-note(image("manjusaka.jpg", width: 150pt)) 的那个二次元 AI 公司。真好！可惜我现在没法去，等明年希望能去实习！
 
-继续学习了 Rust，基本做完了 Exercism 上的 #link("https://exercism.org/tracks/rust")[Rust 练习题]。目前有两个想做的项目：一个是写一个带有 GUI 的 OpenAlex 批量下载工具，虽然没什么用，但可以练习 Rust 的爬虫、异步并发和简单 GUI 功能；另一个则是自己想了很久的 PolarView 项目，看能不能用 AI 整个搞出来，无论是哈基米 3.0 Pro 还是 Claude Opus 4.5 都很强，可以先用 Claude 写出主体，然后用免费的 GLM 4.7 打磨，总之寒假要搞出来。
+继续学习了 Rust，基本做完了 Exercism 上的 #link("https://exercism.org/tracks/rust")[Rust 练习题]。目前有两个想做的项目：一个是写一个带有 GUI 的 OpenAlex 批量下载工具，虽然没什么用，但可以练习 Rust 的爬虫、异步并发和简单 GUI 功能；另一个则是自己想了很久的 PolarView 项目，看能不能用 AI 整个搞出来，无论是哈基米 3 还是 Claude Opus 4.5 都很强，可以先用 Claude 写出主体，然后用免费的 GLM 4.7 打磨，总之寒假要搞出来。
 
-这学期给几个开源项目做了贡献，如 #link("https://github.com/SakiRinn/LiveCaptions-Translator", "LiveCaptions-Translator")、#link("https://github.com/sinelaw/fresh", "Fresh") 等，做贡献最多的是 #link("https://github.com/etiennebacher/tidypolars", "Tidypolars")。自己给 Tidypolars 提了 4 个 PR，两大两小，主要贡献了三个新函数：
+这学期给几个开源项目做了贡献，如 #link("https://github.com/SakiRinn/LiveCaptions-Translator", "LiveCaptions-Translator")、#link("https://github.com/sinelaw/fresh", "Fresh") 等。做贡献最多的是 #link("https://github.com/etiennebacher/tidypolars", "Tidypolars")，主要贡献了三个新函数和一个重大改进：
 - `unnest_longer_polars()`
 - `separate_longer_delim_polars()` #tufted.margin-note(image("兄弟能等等我吗.jpg", width: 250pt))
 - `separate_longer_position_polars()`
+- `pl_wday_lubridate()`
 争取新年继续把剩下几个函数写出来，把 `unnest` 和 `separate` 系列写完。希望能找到一个 Rust + R/Python 的项目做贡献，开源贡献真的很有获得感和自豪感。也许有朝一日我也能成为一个研究软件开发员，所以说：
 
 #quote-box[
