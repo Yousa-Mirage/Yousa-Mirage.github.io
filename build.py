@@ -54,14 +54,6 @@ SITE_DIR = Path("_site")  # 输出目录
 ASSETS_DIR = Path("assets")  # 静态资源目录
 CONFIG_FILE = Path("config.typ")  # 全局配置文件
 
-# 需要注入到 HTML <head> 中的标签
-HEAD_INJECTION = (
-    '<link rel="icon" href="/assets/favicon.ico">'
-    '<script src="/assets/copy-code.js"></script>'
-    '<script src="/assets/line-numbers.js"></script>'
-    '<script src="/assets/format-headings.js"></script>'
-)
-
 
 # ============================================================================
 # 增量编译辅助函数
@@ -336,21 +328,6 @@ def get_pdf_output_path(typ_file: Path) -> Path:
     return SITE_DIR / relative_path.with_suffix(".pdf")
 
 
-def inject_head_tags(html_path: Path):
-    """
-    向 HTML 文件的 </head> 标签前注入 favicon 和脚本标签。
-
-    参数:
-        html_path: HTML 文件路径
-    """
-    try:
-        content = html_path.read_text(encoding="utf-8")
-        modified_content = content.replace("</head>", HEAD_INJECTION + "</head>")
-        html_path.write_text(modified_content, encoding="utf-8")
-    except Exception as e:
-        print(f"  ⚠ 注入 HTML 标签失败: {html_path} - {e}")
-
-
 def run_typst_command(args: List[str]) -> bool:
     """
     运行 typst 命令。
@@ -432,8 +409,6 @@ def build_html(force: bool = False):
         ]
 
         if run_typst_command(args):
-            # 注入 head 标签
-            inject_head_tags(html_output)
             success_count += 1
         else:
             print(f"  ❌ {typ_file} 编译失败")

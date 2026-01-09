@@ -1,4 +1,4 @@
-#import "@preview/tufted:0.1.0"
+#import "tufted-lib/tufted.typ" as tufted
 
 #let template = tufted.tufted-web.with(
   header-links: (
@@ -9,4 +9,12 @@
   ),
   lang: "zh",
   title: "天然純真 / Yousa Mirage",
+  header-elements: (
+    [你好],
+    [Ciallo～(∠・ω< )⌒☆],
+  ),
+  footer-elements: (
+    "© 2026 Yousa-Mirage",
+    [Powered by #link("https://github.com/Yousa-Mirage/Tufted-Blog-Template")[Tufted-Blog-Template]],
+  ),
 )
