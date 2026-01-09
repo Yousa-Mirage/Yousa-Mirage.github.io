@@ -5,7 +5,7 @@
 #{
   tufted.margin-note(image("head.jpg"))
   tufted.margin-note[
-    #link("custom-font-marker")[
+    #html.span(class: "liujian-font")[
       岁岁年年 叠于我身\
       皆循时光 逝而不返\
       无常之物 有常之物\
@@ -22,7 +22,7 @@
 
   万能的宇宙大人啊，万物都有结局对吗？ \
   会变老吗，会死掉吗，会被谁记住吗？
-  
+
   ——#link("https://www.bilibili.com/video/BV1js411Q7Vc", "《异样的风暴中心》")
 ]
 
