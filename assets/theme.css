@@ -221,6 +221,7 @@ THEME TOGGLE BUTTON (DeepWiki Style)
     cursor: pointer;
     margin-left: auto;
     margin-top: 1.6em;
+    margin-right: 3em;
     transition: background-color 0.15s ease;
     color: #374151;
     /* 浅色模式下月亮图标颜色 */
