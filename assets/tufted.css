@@ -20,6 +20,7 @@ html {
 
 /* Sticky footer layout */
 body {
+    margin: 0;
     min-height: 100%;
     display: flex;
     flex-direction: column;
@@ -41,16 +42,38 @@ svg {
     max-height: 80vh;
 }
 
-/* Constrain images within section to text width unless in fullwidth */
-section>figure:not(.fullwidth)>img,
-section>figure:not(.fullwidth)>svg {
-    max-width: 100%;
+/* 
+   CONTENT ALIGNMENT & CENTERING 
+   Shared logic for images, SVGs, and tables 
+*/
+
+/* 1. Content centered in the main text column (55% width) */
+section>img,
+section>svg,
+section>table {
+    max-width: 55%;
+    position: relative;
+    left: 27.5%;
+    transform: translateX(-50%);
 }
 
-/* Images directly in section (not in figure) should be constrained */
 section>img,
 section>svg {
-    max-width: 55%;
+    display: block;
+}
+
+/* 2. Content centered in figures (100% of figure width) */
+section>figure:not(.fullwidth)>img,
+section>figure:not(.fullwidth)>svg,
+figure table {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+section>figure:not(.fullwidth)>img,
+section>figure:not(.fullwidth)>svg {
+    display: block;
 }
 
 /* Fullwidth content */
@@ -244,13 +267,19 @@ QUOTE BLOCKS
 
 /* Quote blocks with left border */
 div[style*="border-inline-start"] {
-    width: 55%;
+    width: 55% !important;
     font-size: 1.4rem;
     line-height: 2.2rem;
     clear: none;
     margin: 1.5em 0;
     padding-right: 0;
     box-sizing: border-box;
+}
+
+/* Nested quote blocks should take full width of parent */
+div[style*="border-inline-start"] div[style*="border-inline-start"] {
+    width: 100% !important;
+    margin: 0.5em 0;
 }
 
 div[style*="border-inline-start"] p {
@@ -276,14 +305,6 @@ table {
     border-collapse: collapse;
     font-size: 1.4rem;
     line-height: 1.6;
-}
-
-figure table {
-    width: 100%;
-}
-
-section>table {
-    width: 55%;
 }
 
 table th,
@@ -342,7 +363,7 @@ RESPONSIVE LAYOUT
 
     /* Full-width quote blocks on mobile */
     div[style*="border-inline-start"] {
-        width: 100%;
+        width: 100% !important;
     }
 
     /* Full-width code blocks on mobile */
@@ -350,7 +371,15 @@ RESPONSIVE LAYOUT
         width: 100%;
     }
 
-    /* Full-width tables on mobile */
+    /* Full-width tables and images on mobile */
+    section>img,
+    section>svg,
+    section>table {
+        max-width: 100%;
+        left: 0;
+        transform: none;
+    }
+
     section>table {
         width: 100%;
     }
@@ -508,6 +537,7 @@ span[role="math"] {
     display: inline-block;
     vertical-align: baseline;
     margin: 0 0.1em;
+    text-indent: 0;
 }
 
 /*******************************************************************************
