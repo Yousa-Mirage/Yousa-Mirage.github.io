@@ -20,10 +20,11 @@ html {
 
 /* Sticky footer layout */
 body {
-    margin: 0;
+    margin: 0 auto;
     min-height: 100%;
     display: flex;
     flex-direction: column;
+    box-sizing: border-box;
 }
 
 /* Main content fills remaining space */
@@ -40,6 +41,8 @@ img,
 svg {
     max-width: 100%;
     max-height: 80vh;
+    height: auto;
+    width: auto;
 }
 
 /* 
@@ -332,28 +335,123 @@ table tbody tr:hover {
 
 
 /*******************************************************************************
+MATH NOTATION
+*******************************************************************************/
+
+/* Block math equations - display as block, centered */
+figure[role="math"] {
+    display: block;
+    width: 55%;
+    text-align: center;
+    margin: 1em 0;
+    padding: 0.5em 0;
+    font-size: 1.4em;
+    line-height: 1.2;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* Math content wrapper - prevent shrinking */
+figure[role="math"]>* {
+    display: inline-block;
+    min-width: max-content;
+    text-align: center;
+}
+
+figure>figure[role="math"] {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0.5em 0;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+/* Math content wrapper for nested figures */
+figure>figure[role="math"]>* {
+    display: inline-block;
+    min-width: max-content;
+    text-align: center;
+}
+
+/* Inline math - smaller size, aligned with text baseline */
+span[role="math"] {
+    display: inline-block;
+    vertical-align: baseline;
+    margin: 0 0.1em;
+    text-indent: 0;
+}
+
+
+/*******************************************************************************
 RESPONSIVE LAYOUT
 *******************************************************************************/
 
 @media (max-width: 760px) {
 
-    /* Display margin notes inline on narrow screens */
+    /* Margin notes render inline on narrow screens */
     .marginnote {
         display: block;
         float: none;
         position: static;
-        padding-left: 1.2rem;
+        padding: 0.85rem 1rem;
         width: 100%;
-        margin-top: 1em;
-        margin-bottom: 1em;
+        margin: 0.5rem 0 1.25rem;
+        background: var(--theme-pre-bg);
+        border: 1px solid var(--theme-pre-border);
+        border-radius: var(--radius-sm);
+        box-sizing: border-box;
     }
 
-    /* Limit image width in margin notes */
+    .marginnote.is-expanded {
+        display: block;
+    }
+
+    /* Footnote margin notes collapse by default */
+    .footnote-ref + .marginnote {
+        display: none;
+    }
+
+    .footnote-ref + .marginnote.is-expanded {
+        display: block;
+    }
+
+    /* Limit image size inside expanded margin notes */
     .marginnote img,
     .marginnote svg {
-        max-width: calc(760px / 3);
-        margin: 0 auto;
+        max-width: 100%;
+        max-height: 50vh;
+        margin: 0.4rem auto;
         display: block;
+    }
+
+    sup.footnote-ref {
+        line-height: 1;
+        top: -0.2em;
+    }
+
+    sup.footnote-ref > a.footnote-ref-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        line-height: 1;
+        min-width: 1.6em;
+        height: 1.6em;
+        padding: 0 0.4em;
+        margin: 0 0.15em;
+        border-radius: 999px;
+        border: 1px solid var(--theme-pre-border);
+        background: var(--theme-pre-bg);
+        color: var(--theme-text);
+        appearance: none;
+        cursor: pointer;
+    }
+
+    sup.footnote-ref>a.footnote-ref-link.is-expanded {
+        background: var(--highlight-weak);
     }
 
     /* Enable hyphenation on narrow screens */
@@ -378,6 +476,8 @@ RESPONSIVE LAYOUT
         max-width: 100%;
         left: 0;
         transform: none;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     section>table {
@@ -489,56 +589,13 @@ a.footnote-ref-link {
     text-shadow: none !important;
 }
 
-
-/*******************************************************************************
-MATH NOTATION
-*******************************************************************************/
-
-/* Block math equations - display as block, centered */
-figure[role="math"] {
-    display: block;
-    width: 55%;
-    text-align: center;
-    margin: 1em 0;
-    padding: 0.5em 0;
-    font-size: 1.4em;
-    line-height: 1.2;
-    overflow-x: auto;
-    overflow-y: hidden;
+@media (min-width: 761px) {
+    sup.marginnote-ref {
+        display: none;
+    }
 }
 
-/* Math content wrapper - prevent shrinking */
-figure[role="math"]>* {
-    display: inline-block;
-    min-width: max-content;
-    text-align: center;
-}
 
-figure>figure[role="math"] {
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin: 0 auto;
-    padding: 0.5em 0;
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-}
-
-/* Math content wrapper for nested figures */
-figure>figure[role="math"]>* {
-    display: inline-block;
-    min-width: max-content;
-    text-align: center;
-}
-
-/* Inline math - smaller size, aligned with text baseline */
-span[role="math"] {
-    display: inline-block;
-    vertical-align: baseline;
-    margin: 0 0.1em;
-    text-indent: 0;
-}
 
 /*******************************************************************************
 POST TILES
