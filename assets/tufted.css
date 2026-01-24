@@ -29,10 +29,12 @@ body {
 /* Main content fills remaining space */
 body>article {
     flex: 1 0 auto;
+    padding: 4.5rem 0 1.5rem;
 }
 
 /* Footer stays at bottom */
 body>footer {
+    margin-top: auto;
     flex-shrink: 0;
 }
 
@@ -409,11 +411,11 @@ RESPONSIVE LAYOUT
     }
 
     /* Footnote margin notes collapse by default */
-    .footnote-ref + .marginnote {
+    .footnote-ref+.marginnote {
         display: none;
     }
 
-    .footnote-ref + .marginnote.is-expanded {
+    .footnote-ref+.marginnote.is-expanded {
         display: block;
     }
 
@@ -431,7 +433,7 @@ RESPONSIVE LAYOUT
         top: -0.2em;
     }
 
-    sup.footnote-ref > a.footnote-ref-link {
+    sup.footnote-ref>a.footnote-ref-link {
         display: inline-flex;
         align-items: center;
         justify-content: center;
