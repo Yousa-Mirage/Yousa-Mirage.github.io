@@ -10,8 +10,7 @@
   lang: "zh",
   title: "天然純真 / Yousa Mirage",
   header-elements: (
-    [你好],
-    [Ciallo～(∠・ω< )⌒☆],
+    [岁岁年年 叠于我身 皆循时光 逝而不返]
   ),
   footer-elements: (
     "© 2026 Yousa-Mirage",
