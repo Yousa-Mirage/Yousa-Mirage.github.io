@@ -3,6 +3,7 @@
 #import "notes.typ": template-notes
 #import "figures.typ": template-figures
 #import "layout.typ": full-width, margin-note
+#import "links.typ": template-links
 
 #let make-header(links) = html.header(
   if links != none {
@@ -40,6 +41,7 @@
   show: template-refs
   show: template-notes
   show: template-figures
+  show: template-links
 
   set text(lang: lang)
 
