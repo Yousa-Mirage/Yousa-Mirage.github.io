@@ -4,6 +4,7 @@
 #import "figures.typ": template-figures
 #import "layout.typ": full-width, margin-note
 #import "links.typ": template-links
+#import "seo.typ": seo-tags
 
 #let make-header(links) = html.header(
   if links != none {
@@ -17,7 +18,11 @@
 
 #let tufted-web(
   header-links: none,
-  title: "Tufted",
+  title: "Tufted Blog Template",
+  description: "Tufted Blog Template",
+  site-url: none,
+  page-path: none,
+  image-path: none,
   lang: "en",
   css: (
     "https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css",
@@ -45,6 +50,12 @@
 
   set text(lang: lang)
 
+  let current-page-path = if page-path != none {
+    page-path
+  } else {
+    sys.inputs.at("page-path", default: none)
+  }
+
   html.html(
     lang: lang,
     {
@@ -54,6 +65,15 @@
         html.meta(name: "viewport", content: "width=device-width, initial-scale=1")
         html.title(title)
         html.link(rel: "icon", href: icon)
+
+        // SEO
+        seo-tags(
+          title: title,
+          description: description,
+          site-url: site-url,
+          page-path: current-page-path,
+          image-path: image-path,
+        )
 
         // Stylesheets
         for (css-link) in css {

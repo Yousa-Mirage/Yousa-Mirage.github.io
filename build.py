@@ -34,6 +34,7 @@ Tufted Blog Template 构建脚本
 """
 
 import argparse
+import html
 import os
 import re
 import shutil
@@ -42,6 +43,7 @@ import sys
 import threading
 import time
 import webbrowser
+from datetime import datetime
 from pathlib import Path
 from typing import List, Optional, Set
 
@@ -358,7 +360,7 @@ def run_typst_command(args: List[str]) -> bool:
 # ============================================================================
 
 
-def build_html(force: bool = False):
+def build_html(force: bool = False) -> bool:
     """
     编译所有 .typ 文件为 HTML（文件名中包含 PDF 的除外）。
 
@@ -386,6 +388,23 @@ def build_html(force: bool = False):
     for typ_file in html_files:
         html_output = get_html_output_path(typ_file)
 
+        try:
+            rel_path = typ_file.relative_to(CONTENT_DIR)
+
+            if rel_path.name == "index.typ":
+                # index.typ uses the parent directory name as the path
+                # content/Blog/index.typ -> "Blog"
+                # content/index.typ -> "" (Homepage)
+                page_path = rel_path.parent.as_posix()
+                if page_path == ".":
+                    page_path = ""
+            else:
+                # Common files use the filename as the path
+                # content/about.typ -> "about"
+                page_path = rel_path.with_suffix("").as_posix()
+        except ValueError:
+            page_path = ""
+
         # 增量编译检查
         if not force and not needs_rebuild(typ_file, html_output, common_deps):
             skip_count += 1
@@ -404,6 +423,8 @@ def build_html(force: bool = False):
             "html",
             "--format",
             "html",
+            "--input",
+            f"page-path={page_path}",
             str(typ_file),
             str(html_output),
         ]
@@ -427,7 +448,7 @@ def build_html(force: bool = False):
     return fail_count == 0
 
 
-def build_pdf(force: bool = False):
+def build_pdf(force: bool = False) -> bool:
     """
     编译文件名包含 "PDF" 的 .typ 文件为 PDF。
 
@@ -632,7 +653,102 @@ def preview(port: int = 8000, open_browser_flag: bool = True) -> bool:
         return False
 
 
-def build(force: bool = False):
+def get_site_url() -> str:
+    """
+    Parse site-url from config.typ.
+    Fallback to a default if not found.
+    """
+    if not CONFIG_FILE.exists():
+        return ""
+
+    try:
+        content = CONFIG_FILE.read_text(encoding="utf-8")
+        # Look for site-url: "..."
+        match = re.search(r'site-url\s*:\s*"([^"]*)"', content)
+        if match:
+            return match.group(1).strip().rstrip("/")
+    except Exception as e:
+        print(f"⚠️ Warning: Failed to parse site-url from config.typ: {e}")
+
+    return ""
+
+
+def generate_sitemap() -> bool:
+    """
+    Generate sitemap.xml for the website.
+    """
+    base_url = get_site_url()
+    if not base_url:
+        print("⚠️ 跳过 Sitemap 构建: config.typ 中未配置 'site-url'。")
+        return True
+
+    sitemap_path = SITE_DIR / "sitemap.xml"
+    urls = []
+
+    # Walk through the _site directory
+    for file_path in SITE_DIR.rglob("*.html"):
+        # Calculate relative path from _site
+        rel_path = file_path.relative_to(SITE_DIR).as_posix()
+
+        # Determine URL path
+        if rel_path == "index.html":
+            url_path = ""
+        elif rel_path.endswith("/index.html"):
+            url_path = rel_path[:-10]
+        elif rel_path.endswith(".html"):
+            url_path = rel_path[:-5] + "/"
+        else:
+            url_path = rel_path
+
+        full_url = f"{base_url}/{url_path}"
+
+        # Get last modification time
+        mtime = file_path.stat().st_mtime
+        lastmod = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d")
+
+        urls.append(f"""  <url>
+    <loc>{html.escape(full_url)}</loc>
+    <lastmod>{lastmod}</lastmod>
+  </url>""")
+
+    newline = "\n"
+    sitemap_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{newline.join(sorted(urls))}
+</urlset>"""
+
+    try:
+        sitemap_path.write_text(sitemap_content, encoding="utf-8")
+        print(f"✅ Sitemap 构建完成: 包含 {len(urls)} 个页面")
+        return True
+    except Exception as e:
+        print(f"❌ Sitemap 构建失败: {e}")
+        return False
+
+
+def generate_robots_txt() -> bool:
+    """
+    Generate robots.txt pointing to the sitemap.
+    """
+    site_url = get_site_url()
+    if not site_url:
+        return True
+
+    robots_content = f"""User-agent: *
+Allow: /
+
+Sitemap: {site_url}/sitemap.xml
+"""
+
+    try:
+        (SITE_DIR / "robots.txt").write_text(robots_content, encoding="utf-8")
+        return True
+    except Exception as e:
+        print(f"❌ 生成 robots.txt 失败: {e}")
+        return False
+
+
+def build(force: bool = False) -> bool:
     """
     完整构建：HTML + PDF + 资源。
 
@@ -641,6 +757,7 @@ def build(force: bool = False):
     """
     print("-" * 60)
     if force:
+        clean()
         print("🛠️ 开始完整构建...")
     else:
         print("🚀 开始增量构建...")
@@ -658,6 +775,8 @@ def build(force: bool = False):
 
     results.append(copy_assets())
     results.append(copy_content_assets(force))
+    results.append(generate_sitemap())
+    results.append(generate_robots_txt())
 
     print("-" * 60)
     if all(results):
@@ -675,7 +794,7 @@ def build(force: bool = False):
 # ============================================================================
 
 
-def create_parser():
+def create_parser() -> argparse.ArgumentParser:
     """
     创建命令行参数解析器。
     """
