@@ -1,10 +1,10 @@
 #import "tufted-lib/tufted.typ" as tufted
 
 #let template = tufted.tufted-web.with(
-  title: "天然純真 / Yousa Mirage",
+  website-title: "天然純真 / Yousa Mirage",
+  author: "天然純真",
   description: "天然純真的个人网站，随便写一点东西。",
-  site-url: "https://yousa-mirage.github.io/",
-  lang: "zh",
+  website-url: "https://yousa-mirage.github.io/",
   header-links: (
     "/": "Home",
     "/Blog/": "Blog",

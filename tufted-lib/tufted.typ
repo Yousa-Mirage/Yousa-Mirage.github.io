@@ -4,41 +4,37 @@
 #import "figures.typ": template-figures
 #import "layout.typ": full-width, margin-note
 #import "links.typ": template-links
-#import "seo.typ": seo-tags
+#import "metadata.typ": metadata
 
-#let make-header(links) = html.header(
-  if links != none {
-    html.nav(
-      for (href, title) in links {
-        html.a(href: href, title)
-      },
-    )
-  },
-)
-
+/// Tufted 博客模板的主包装函数。
+///
+/// 用于生成完整的 HTML 页面结构，包含 SEO 元数据、CSS/JS 资源加载以及页眉页脚布局。
 #let tufted-web(
-  header-links: none,
-  title: "Tufted Blog Template",
-  description: "Tufted Blog Template",
-  site-url: none,
-  page-path: none,
+  header-links: (:),
+
+  // Meta data
+  title: "",
+  author: none,
+  description: "",
+  lang: "zh",
+  date: none,
+  website-title: "",
+  website-url: none,
+
+  // For SEO
   image-path: none,
-  lang: "en",
-  css: (
-    "https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css",
-    "/assets/tufted.css",
-    "/assets/theme.css",
-    "/assets/custom.css",
-  ),
-  icon: "/assets/favicon.ico",
-  js-scripts: (
-    "/assets/code-blocks.js",
-    "/assets/format-headings.js",
-    "/assets/theme-toggle.js",
-    "/assets/marginnote-toggle.js",
-  ),
+
+  // For RSS
+  feed-dir: (),
+
+  // Custom header and footer
   header-elements: (),
   footer-elements: (),
+
+  // Custom CSS and JS Scripts
+  css: ("/assets/custom.css",),
+  js-scripts: (),
+
   content,
 ) = {
   // Apply styling
@@ -50,37 +46,42 @@
 
   set text(lang: lang)
 
-  let current-page-path = if page-path != none {
-    page-path
-  } else {
-    sys.inputs.at("page-path", default: none)
-  }
-
   html.html(
     lang: lang,
     {
       // Head
       html.head({
-        html.meta(charset: "utf-8")
-        html.meta(name: "viewport", content: "width=device-width, initial-scale=1")
-        html.title(title)
-        html.link(rel: "icon", href: icon)
-
-        // SEO
-        seo-tags(
+        // All metadata
+        metadata(
           title: title,
+          author: author,
           description: description,
-          site-url: site-url,
-          page-path: current-page-path,
+          lang: lang,
+          date: date,
+          website-title: website-title,
+          website-url: website-url,
           image-path: image-path,
+          feed-dir: feed-dir,
         )
 
-        // Stylesheets
-        for (css-link) in css {
+        // load CSS
+        let base-css = (
+          "https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css",
+          "/assets/tufted.css",
+          "/assets/theme.css",
+        )
+        for (css-link) in (base-css + css).dedup() {
           html.link(rel: "stylesheet", href: css-link)
         }
 
-        for (js-src) in js-scripts {
+        // load JS scripts
+        let base-js = (
+          "/assets/code-blocks.js",
+          "/assets/format-headings.js",
+          "/assets/theme-toggle.js",
+          "/assets/marginnote-toggle.js",
+        )
+        for (js-src) in (base-js + js-scripts).dedup() {
           html.script(src: js-src)
         }
       })
@@ -101,7 +102,17 @@
         )
 
         // Add website navigation
-        make-header(header-links)
+        html.header(
+          class: "site-header",
+          if header-links != none and header-links.len() > 0 {
+            html.nav(
+              class: "site-nav",
+              for (href, title) in header-links {
+                html.a(href: href, title)
+              },
+            )
+          }
+        )
 
         // Main content
         html.article(
