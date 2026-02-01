@@ -19,4 +19,4 @@
 
 会 Python、R、SQL，在学 Rust、JS/TS，喜欢用 Zed + Typst 写东西，喜欢折腾新玩意儿，有一个公众号#footnote[`Python是纸老虎`，给社会学小朋友开的，现在有了 AI 也用不上了。]。
 
-喜欢 V 曲，喜欢#link("https://space.bilibili.com/282994", "泠鸢yousa")，喜欢 #link("https://www.bilibili.com/bangumi/play/ss1177?spm_id_from=333.337.0.0")[_CLANNAD_]，喜欢《笑傲江湖》，喜欢炒冷饭、吃冷饭、回忆冷饭，喜欢大家。
+喜欢 V 曲，喜欢#link("https://space.bilibili.com/282994", "泠鸢yousa")，喜欢 #link("https://www.bilibili.com/bangumi/play/ss1177?spm_id_from=333.337.0.0", [_CLANNAD_])，喜欢炒冷饭、吃冷饭、回忆冷饭，喜欢大家。
