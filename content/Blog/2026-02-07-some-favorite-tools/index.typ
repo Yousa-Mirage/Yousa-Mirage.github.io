@@ -87,3 +87,5 @@ Posit 公司（前身为 RStudio）开发了一个名为 `Shinylive` 的框架�
 根据我的经验，#link("https://positron.posit.co/")[Positron] 是目前数据科学家和统计学家的最佳选择，无论你是在编写 R、Python 还是 Julia 代码。Positron 由 RStudio 的开发商 Posit 公司打造，基于 VS Code 的开源版本构建。因此，它将 RStudio 那些出色的、以数据为中心的功能（如变量监控和绘图面板）与 VS Code 的灵活性及强大的扩展性完美结合。这感觉就像是兼顾了两个世界的长处。
 
 与 VS Code 不同，安装 Positron 后运行 R 或 Python 极其简单，你完全不需要再折腾像 #link("https://github.com/randy3k/radian")[`radian`] 这样的扩展插件。查看图表、渲染 Quarto 文档、预览数据集……所有这些功能都做到了开箱即用。而且相比于 RStudio，在 Positron 中处理远程 SSH 会话或 WSL (Windows Subsystem for Linux) 等高级操作要容易得多。所以，别犹豫了，快去试一试吧。
+
+#image("miku.jpg")
