@@ -3,7 +3,7 @@
 #show: template.with(title: "累", date: datetime(year: 2026, month: 2, day: 5))
 
 #{
-  tufted.margin-note(image("我也要死吗.png"))
+  tufted.margin-note(image("我也要死吗.jpg"))
   tufted.margin-note(image("自刎归天.png"))
 }
 = 累
