@@ -1,5 +1,8 @@
 #import "../index.typ": template, tufted
-#show: template.with(title: "Typst 个人网站")
+#show: template.with(
+  title: "零基础使用 Typst 搭建学术风个人网站",
+  date: datetime(year: 2026, month: 1, day: 3),
+)
 
 = 零基础使用 Typst 搭建学术风个人网站
 

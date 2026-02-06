@@ -18,4 +18,5 @@
     "© 2026 Yousa-Mirage",
     [Powered by #link("https://github.com/Yousa-Mirage/Tufted-Blog-Template")[Tufted-Blog-Template]],
   ),
+  feed-dir: ("Blog/",),
 )

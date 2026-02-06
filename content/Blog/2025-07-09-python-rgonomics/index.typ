@@ -1,5 +1,8 @@
 #import "../index.typ": template, tufted
-#show: template.with(title: "Python 的 R 式人体工学")
+#show: template.with(
+  title: "Python 的 R 式人体工学",
+  date: datetime(year: 2025, month: 7, day: 9),
+)
 
 #tufted.margin-note[
   本文转载、翻译自 Emily Riederer 发表于 2025.1.26 的博客文章 #link("https://emilyriederer.netlify.app/post/py-rgo-2025/", [_Python Rgonomics - 2025_])。`Rgonomics` 是作者自造词，结合了 R 语言和 Ergonomics 人体工学，意指借鉴 R 语言的便利设计，让 Python 对 R 用户来说更好用，也就是*最佳的编程实践*。

@@ -1,6 +1,9 @@
 #import "../index.typ": template, tufted
 #import "@preview/theorion:0.4.1": *
-#show: template.with(title: "Why Polars")
+#show: template.with(
+  title: "我为什么放弃 Pandas 而转用 Polars？",
+  date: datetime(year: 2025, month: 7, day: 29),
+)
 
 #{
   tufted.margin-note[

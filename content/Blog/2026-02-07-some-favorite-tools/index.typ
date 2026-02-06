@@ -1,5 +1,9 @@
 #import "../index.typ": template, tufted
-#show: template.with(title: "2026 年展望：我最钟爱的几款数据科学工具")
+#show: template.with(
+  title: "2026 年展望：我最钟爱的几款数据科学工具",
+  description: "在过去一年里，我参与的项目对软件灵活性提出了越来越高的要求。一个可能的典型流程是：先使用 Python 脚本爬取网页数据，接着用 R 语言进行数据清洗并将其加载到数据库中，最后由分析师通过 SQL 进行查询。这些工作既可以在笔记本电脑的本地环境上完成，也可以完全在 Databricks 或 Palantir Foundry 等平台上运行。为了管理不同版本的脚本，我可能周一还在用 GitHub，周二就换成了 GitLab，到了周三又得切换到 Bitbucket。面对今年这些多得令人眼花缭乱的工具，我想花点时间重点介绍几款我真正喜欢使用的利器。希望其他统计学家和数据科学家也能觉得这份清单对自己有价值，并在 2026 年将这些新工具纳入自己的“工具箱”中。",
+  date: datetime(year: 2026, month: 2, day: 7),
+)
 
 #tufted.margin-note[本博文旨在盘点我在迎接新的一年之际，最令我期待和兴奋的若干数据科学工具。]
 

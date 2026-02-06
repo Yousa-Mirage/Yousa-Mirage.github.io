@@ -1,6 +1,9 @@
 #import "../index.typ": template, tufted
 #import "@preview/tablem:0.3.0": three-line-table
-#show: template.with(title: "从 75 秒到 0.24 秒：Polars/DuckDB 的魅力")
+#show: template.with(
+  title: "从 75 秒到 0.24 秒：Polars/DuckDB 的魅力",
+  date: datetime(year: 2025, month: 11, day: 8),
+)
 
 #tufted.margin-note[
   面对一个 2GB、460 万行的嵌套数据筛选任务，传统的 Tidyverse 和 Pandas 耗时数十秒，而现代工具 Polars 和 DuckDB 仅需0.3秒。本文尝试对 Python 和 R 两门语言的六大工具进行了基准测试，直观展示了“全量加载”与“惰性计算”之间惊人的 300 倍性能鸿沟，并分享了为什么 Polars 和 DuckDB 是现代数据分析的利器。
