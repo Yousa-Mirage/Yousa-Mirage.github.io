@@ -21,7 +21,7 @@
 
 R 语言中的 #link("https://www.tidyverse.org/packages/")[`dplyr`] 包依然是我最喜欢的数据处理工具。其优雅的语法允许使用者将分析过程拆解为一系列清晰的步骤，相比原生 R（Base R）或我在 R 语言之外见过的任何工具，它生成的代码在可读性上都遥遥领先。`dplyr` 不仅启发了其他编程语言中的相关扩展（例如 Julia 中的 #link("https://tidierorg.github.io/TidierData.jl/latest/")[`TidierData`]），还深刻影响了 Python 中两款日益流行的处理包——#link("https://docs.pola.rs/")[`Polars`] 和 #link("https://ibis-project.org/")[`Ibis`] （这两者的操作体验都比 Pandas 流畅得多）。
 
-`dplyr` 今年让我爱不释手的一个强大特性，在于它编写的代码能够无缝适配多种不同的计算后端。同一段 `dplyr` 代码，既能处理从 CSV 文件加载到 R 环境的数据，也能直接操作存储在数据库中的海量数据集#footnote[通过 #link("https://dbplyr.tidyverse.org/")[`dbplyr`] 包直接操作数据库。]。此外，还有一些 R 包支持通过 `dplyr` 语法处理存储在 Parquet 或 Apache Arrow 文件中的大型数据集#footnote[可参考 R4DS 书中 #link("https://r4ds.hadley.nz/arrow.html#sec-parquet")[22 Arrow 章节]。]#footnote[也可使用 #link("https://tidypolars.etiennebacher.com/")[`tidypolars`] 库，使用 tidy 语法操作高性能的 `Polars` 后端。笔者为该库贡献了不少代码。]。最近，我特别热衷于使用 #link("https://duckplyr.tidyverse.org/")[`duckplyr`] 包，它对 `dplyr` 进行了增强，使其能够调用 *DuckDB* 计算引擎来高效处理数据库或 Parquet/Arrow 文件中的数据。而这，也正引出了我要介绍的下一个工具。
+`dplyr` 今年让我爱不释手的一个强大特性，在于它编写的代码能够无缝适配多种不同的计算后端。同一段 `dplyr` 代码，既能处理从 CSV 文件加载到 R 环境的数据，也能直接操作存储在数据库中的海量数据集#footnote[通过 #link("https://dbplyr.tidyverse.org/")[`dbplyr`] 包直接操作数据库。]。此外，还有一些 R 包支持通过 `dplyr` 语法处理存储在 Parquet 或 Apache Arrow 文件中的大型数据集#footnote[可参考 R4DS 书中 #link("https://r4ds.hadley.nz/arrow.html#sec-parquet")[22 Arrow 章节]。]#footnote[也可使用 #link("https://tidypolars.etiennebacher.com/")[`tidypolars`] 库，使用 tidy 语法操作高性能的 `Polars` 后端。笔者为该库贡献了不少代码。]。最近，我特别热衷于使用 #link("https://duckplyr.tidyverse.org/")[`duckplyr`] 包，它对 `dplyr` 进行了增强，使其能够调用 *DuckDB* 计算引擎来高效处理数据库或 Parquet/Arrow 文件中的数据。而这也正引出了我要介绍的下一个工具。
 
 === DuckDB
 
