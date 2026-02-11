@@ -1,17 +1,17 @@
 # Default task: full build
 default: build
 
-# Full build (HTML + PDF + assets). Use 'just build true' for forced rebuild.
-build force="":
-    @uv run build.py build {{ if force == "true" { "--force" } else { "" } }}
+# Full build (HTML + PDF + assets). Usage: just build [-f/--force]
+build *args:
+    @uv run build.py build {{ args }}
 
-# Build only HTML files. Use 'just html true' for forced rebuild.
-html force="":
-    @uv run build.py html {{ if force == "true" { "--force" } else { "" } }}
+# Build only HTML files. Usage: just html [-f/--force]
+html *args:
+    @uv run build.py html {{ args }}
 
-# Build only PDF files. Use 'just pdf true' for forced rebuild.
-pdf force="":
-    @uv run build.py pdf {{ if force == "true" { "--force" } else { "" } }}
+# Build only PDF files. Usage: just pdf [-f/--force]
+pdf *args:
+    @uv run build.py pdf {{ args }}
 
 # Only copy static assets
 assets:
