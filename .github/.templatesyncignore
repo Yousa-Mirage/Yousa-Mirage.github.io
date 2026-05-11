@@ -1,0 +1,16 @@
+# User-owned site content and site-wide config
+content/
+config.typ
+
+# User-owned styling / branding
+assets/custom.css
+assets/favicon.ico
+
+# Documentation
+.github/workflows/update.yml
+CNAME
+LICENSE
+README.md
+README_en.md
+
+# You can remove the above lines or add new lines based on your needs.
