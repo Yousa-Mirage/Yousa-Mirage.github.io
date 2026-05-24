@@ -6,6 +6,7 @@
 #import "layout.typ": full-width, margin-note
 #import "links.typ": template-links
 #import "metadata.typ": metadata
+#import "byline.typ": template-byline
 
 /// The main wrapper function of Tufted Blog Template.
 ///
@@ -20,6 +21,7 @@
   description: "",
   lang: "zh",
   date: none,
+  extra-info: none,
   website-title: "",
   website-url: none,
 
@@ -45,6 +47,7 @@
   show: template-notes
   show: template-figures
   show: template-links
+  show: template-byline.with(author: author, date: date, extra-info: extra-info)
 
   set text(lang: lang)
 
