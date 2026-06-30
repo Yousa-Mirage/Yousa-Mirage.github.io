@@ -7,8 +7,8 @@
 
 	function createButton() {
 		const button = document.createElement("button");
-		button.id = "back-to-top";
-		button.className = "back-to-top-btn";
+		button.id = "page-jump-btn";
+		button.className = "page-jump-btn";
 		button.type = "button";
 		button.setAttribute("aria-label", "返回顶部");
 		button.innerHTML =
