@@ -55,6 +55,7 @@ CONTENT_DIR = Path("content")  # 源文件目录
 SITE_DIR = Path("_site")  # 输出目录
 ASSETS_DIR = Path("assets")  # 静态资源目录
 CONFIG_FILE = Path("config.typ")  # 全局配置文件
+MATHML_MIN_TYPST_VERSION = (0, 15, 0)
 
 
 @dataclass
@@ -122,6 +123,48 @@ class HTMLMetadataParser(HTMLParser):
     def handle_data(self, data: str):
         if self._in_title:
             self.metadata["title"] += data
+
+
+def get_typst_version() -> tuple[int, ...] | None:
+    """
+    获取当前 Typst CLI 的语义化版本号。
+
+    返回:
+        tuple[int, int, int] | None: 版本号，获取失败时返回 None
+    """
+    try:
+        result = subprocess.run(
+            ["typst", "--version"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        )
+    except (FileNotFoundError, OSError):
+        return None
+
+    if result.returncode != 0:
+        return None
+
+    match = re.search(r"typst (\d+)\.(\d+)\.(\d+)", result.stdout)
+    if match is None:
+        return None
+
+    return tuple(int(component) for component in match.groups())
+
+
+def warn_if_typst_version_is_outdated() -> None:
+    """
+    对低于 MathML 支持基线的 Typst 版本输出提示。
+    """
+    version = get_typst_version()
+    if version is None or version >= MATHML_MIN_TYPST_VERSION:
+        return
+
+    current = ".".join(str(component) for component in version)
+    required = ".".join(str(component) for component in MATHML_MIN_TYPST_VERSION)
+    print(
+        f"  ⚠️ 检测到 Typst {current}。HTML 导出的原生 MathML 公式支持需要 Typst {required}+，建议升级 Typst 版本。"
+    )
 
 
 # ============================================================================
@@ -1223,6 +1266,9 @@ if __name__ == "__main__":
     # 确保在项目根目录运行
     script_dir = Path(__file__).parent.absolute()
     os.chdir(script_dir)
+
+    if args.command in {"build", "html", "pdf"}:
+        warn_if_typst_version_is_outdated()
 
     # 获取 force 参数
     force = getattr(args, "force", False)
