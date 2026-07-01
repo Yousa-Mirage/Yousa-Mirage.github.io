@@ -193,7 +193,8 @@ table tbody tr:hover {
 	background-color: var(--theme-table-row-hover);
 }
 
-[role="math"] {
+.math-inline > svg,
+.math-block > svg {
 	filter: var(--theme-math-filter);
 }
 
