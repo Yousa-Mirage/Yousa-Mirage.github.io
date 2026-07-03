@@ -1,5 +1,5 @@
 #import "../index.typ": template, tufted
-#import "@preview/theorion:0.4.1": *
+#import "@preview/theorion:0.6.0": *
 #show: template.with(
   title: "开源贡献（2025.9 ~ 2026.2）",
   date: datetime(year: 2026, month: 2, day: 11),
@@ -8,7 +8,7 @@
 
 = 开源贡献（2025.9 \~ 2026.2）
 
-#quote-box[“陪伴是最长情的告白。”]
+#quote-block[“陪伴是最长情的告白。”]
 
 == 缘起： LiveCaptions-Translator
 
@@ -83,7 +83,7 @@
 
 有点体会到“劳动”和“异化劳动”的区别了，也应了那句台词：
 
-#quote-box[
+#quote-block[
   “是，人活着总想发点光散点热，可你不能拿我们当劈柴烧！”\
   ——《我的团长我的团》
 ]

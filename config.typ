@@ -9,13 +9,14 @@
     "/": "Home",
     "/Blog/": "Blog",
     "/Entry": "Entry",
+    "/Work/": "Work",
     "/About/": "About",
   ),
   header-elements: (
     [岁岁年年 叠于我身 皆循时光 逝而不返],
   ),
   footer-elements: (
-    "© 2026 Yousa-Mirage",
+    [无常之物 有常之物 时至今日 悉数于此],
     [Powered by #link("https://github.com/Yousa-Mirage/Tufted-Blog-Template")[Tufted-Blog-Template]],
   ),
   feed-dir: ("Blog/",),
