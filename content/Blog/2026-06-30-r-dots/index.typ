@@ -3,7 +3,7 @@
 #import "@preview/tablem:0.3.0": three-line-table
 #show: template.with(
   title: "R 中的三个点 ...：小符号的大作用",
-  date: datetime(year: 2026, month: 2, day: 11),
+  date: datetime(year: 2026, month: 6, day: 30),
   description: "R 中的三个点 ...：小符号的大作用",
 )
 
