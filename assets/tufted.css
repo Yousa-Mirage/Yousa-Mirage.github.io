@@ -436,6 +436,13 @@ div[style*="border-inline-start"] p {
 	width: 100%;
 }
 
+/* Keep display math consistent with formulas in the main text column. */
+div[style*="border-inline-start"] > figure.math-block {
+	width: 100%;
+	max-width: 100%;
+	font-size: 1em;
+}
+
 div[style*="border-inline-start"] .footnote-ref,
 div[style*="border-inline-start"] .marginnote,
 div[style*="border-inline-start"] .footnote-ref a {
@@ -606,11 +613,6 @@ RESPONSIVE LAYOUT
 		margin-right: auto;
 	}
 
-	/* Blog index rows take full width on mobile */
-	.blog-entry {
-		width: 100%;
-	}
-
 	.article-byline {
 		width: 100%;
 	}
@@ -769,6 +771,13 @@ BLOG INDEX
 	color: var(--theme-footer, #777);
 	font-size: 1.2em;
 	white-space: nowrap;
+}
+
+@media (max-width: 760px) {
+	/* Blog index rows take full width on mobile */
+	.blog-entry {
+		width: 100%;
+	}
 }
 
 /*******************************************************************************
