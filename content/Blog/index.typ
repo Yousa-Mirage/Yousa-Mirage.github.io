@@ -6,6 +6,11 @@
 == 2026
 
 #tufted.blog-entry(
+  date: datetime(year: 2026, month: 9, day: 19),
+  path: "2026-09-19-r-if-returns-value/",
+  title: "R 中的 if 也能返回值：从条件赋值到 NULL、类型与求值细节",
+)
+#tufted.blog-entry(
   date: datetime(year: 2026, month: 6, day: 30),
   path: "2026-06-30-r-dots/",
   title: "R 中的三个点 ...：小符号的大作用",
