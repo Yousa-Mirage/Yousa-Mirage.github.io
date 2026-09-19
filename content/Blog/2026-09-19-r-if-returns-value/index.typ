@@ -4,6 +4,7 @@
   title: "R 中的 if 也能返回值：从条件赋值到 NULL、类型与求值细节",
   date: datetime(year: 2026, month: 9, day: 19),
   description: "从 R 的求值规则出发，讨论 if 条件赋值的用法、NULL、类型、作用域与维护风险。",
+  image-path: "Blog/2026-09-19-r-if-returns-value/世末歌者.webp",
 )
 
 = R 中的 if 也能返回值：从条件赋值到 NULL、类型与求值细节
