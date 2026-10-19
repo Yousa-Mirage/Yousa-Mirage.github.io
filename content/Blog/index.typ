@@ -6,6 +6,11 @@
 == 2026
 
 #tufted.blog-entry(
+  date: datetime(year: 2026, month: 10, day: 19),
+  path: "2026-10-19-using-just-with-test-files/",
+  title: "用 Just 只运行部分测试文件",
+)
+#tufted.blog-entry(
   date: datetime(year: 2026, month: 9, day: 19),
   path: "2026-09-19-r-if-returns-value/",
   title: "R 中的 if 也能返回值：从条件赋值到 NULL、类型与求值细节",
