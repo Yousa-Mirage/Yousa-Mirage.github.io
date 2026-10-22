@@ -4,6 +4,7 @@
   title: "Python 中的 range 是迭代器吗？",
   date: datetime(year: 2026, month: 10, day: 22),
   description: "Python 的 range 对象可以被多次遍历、支持索引和 len，却并不实现迭代器协议。本文解释 range 与迭代器的区别，以及为什么它更适合重复使用。",
+  extra-info: [译者：#link("https://github.com/Yousa-Mirage")[天然純真]],
 )
 
 = Python 中的 range 不是迭代器
