@@ -8,7 +8,7 @@
 #tufted.blog-entry(
   date: datetime(year: 2026, month: 10, day: 22),
   path: "2026-10-22-python-itertools/",
-  title: "介绍 Python 的 itertools 库",
+  title: "Python itertools 完全指南：理解常见数据迭代模式",
 )
 #tufted.blog-entry(
   date: datetime(year: 2026, month: 10, day: 19),
