@@ -6,6 +6,11 @@
 == 2026
 
 #tufted.blog-entry(
+  date: datetime(year: 2026, month: 10, day: 24),
+  path: "2026-10-24-two-useful-updates-in-python-3.15/",
+  title: "Python 3.15 中两个有用的更新",
+)
+#tufted.blog-entry(
   date: datetime(year: 2026, month: 10, day: 22),
   path: "2026-10-22-python-range/",
   title: "Python 中的 range 是迭代器吗？",
