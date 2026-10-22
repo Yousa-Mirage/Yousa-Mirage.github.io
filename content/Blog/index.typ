@@ -6,6 +6,11 @@
 == 2026
 
 #tufted.blog-entry(
+  date: datetime(year: 2026, month: 10, day: 22),
+  path: "2026-10-22-python-itertools/",
+  title: "介绍 Python 的 itertools 库",
+)
+#tufted.blog-entry(
   date: datetime(year: 2026, month: 10, day: 19),
   path: "2026-10-19-using-just-with-test-files/",
   title: "用 Just 只运行部分测试文件",
