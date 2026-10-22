@@ -7,7 +7,7 @@
   extra-info: [译者：#link("https://github.com/Yousa-Mirage")[天然純真]],
 )
 
-= Python 中的 range 不是迭代器
+= Python 中的 range 是迭代器吗？
 
 #tufted.margin-note[
   本文翻译自 Trey Hunner 在 2018 年 2 月 28 日发表的博客文章 #link("https://treyhunner.com/2018/02/python-range-is-not-an-iterator/", [_Python: range is not an iterator_])。
