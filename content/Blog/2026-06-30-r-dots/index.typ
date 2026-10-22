@@ -8,7 +8,7 @@
 )
 
 #tufted.margin-note[
-  类似的主题内容也可参见 #link( "https://design.tidyverse.org/dots-after-required.html", [_Tidy design principles_]) 和 #link("https://www.cynkra.com/blog/2026-06-12-dots/", [_Three small dots for more readable code_])。
+  类似的主题内容也可参见 #link("https://design.tidyverse.org/dots-after-required.html", [_Tidy design principles_]) 和 #link("https://www.cynkra.com/blog/2026-06-12-dots/", [_Three small dots for more readable code_])。
 ]
 
 = R 中的三个点 `...`：小符号的大作用

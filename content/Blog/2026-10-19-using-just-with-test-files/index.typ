@@ -59,6 +59,6 @@ _难道不能直接用 Make 代替 Just 吗？_
 
 大概可以。我只是从来没写过 Makefile，而且是通过一位合作开发者才知道 Just 的。
 
-我相当确定，对这个简单的例子来说，Make 也能很好地完成。不过 #link("https://github.com/casey/just#just")[Just 的文档]列出了它与 Make 的许多差异和改进。这篇文章只是想展示一个能小幅提升工作流体验的小技巧。
-
-译者：我认为 Just 在单纯的“运行命令”方面比 Make 更加直观和易用，尤其是对于不熟悉 Makefile 语法的人来说。
+我相当确定，对这个简单的例子来说，Make 也能很好地完成。不过 #link("https://github.com/casey/just#just")[Just 的文档]列出了它与 Make 的许多差异和改进。这篇文章只是想展示一个能小幅提升工作流体验的小技巧。#tufted.margin-note[
+  译者：我认为 Just 在单纯的“运行命令”方面比 Make 更加直观和易用，尤其是对于不熟悉 Makefile 语法的人来说。
+]

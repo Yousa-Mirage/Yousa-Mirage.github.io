@@ -31,26 +31,26 @@ Python 在数据处理领域有如今的地位，和 Pandas 的存在密不可�
 - 基于 Arrow
 
   Polars 具有惊人性能的一个原因是使用 Apache Arrow，一种独立于语言的内存格式。在 Arrow 上构建数据库的主要优点之一是互操作性，这种互操作性可以提高性能，因为它避免了将数据转换为不同格式以在数据管道的不同步骤之间传递（换句话说它避免了对数据进行序列化和反序列化）。此外 Arrow 还具有更高的内存效率，因为两个进程可以共享相同的数据，无需创建副本。据估计，序列化/反序列化占数据工作流中 80-90% 的计算开销，Arrow 的通用数据格式为 Polars 带来了显著性能提升。
-  
+
   Arrow 还具有比 Pandas 更广泛的数据类型内置支持，由于 Pandas 基于 NumPy#footnote[Pandas 在 2.0 版本中也引入了 Arrow 数据后端，可以在导入/构建数据时指定`dtype_backend="pyarrow"`。]，它在处理整数和浮点列方面非常出色，但难以应对其他数据类型。虽然 NumPy 的核心是以 C 编写，但它仍然受到 Python 某些类型的制约，导致处理这些类型时性能不佳，比如字符串、列表等等，因为 Numpy 本身就不是为 Pandas 而设计的。相比之下，Arrow 对日期时间、布尔值、字符串、二进制甚至复杂的列类型*（例如包含列表和复杂结构体的列类型）*提供了很好的支持。另外，Arrow 能够原生处理缺失数据，这在 NumPy 中需要额外步骤。最后，Arrow 使用列式数据存储，无论数据类型如何，所有列都存储在连续内存块中。这不仅使并行更容易，也使数据检索更快。
-  
+
   （与之 Arrow 内存格式相匹配的存储格式是 Parquet。首先与行式存储#footnote[如 CSV。]相比，Parquet 是一种列式存储，同一列的数据被连续存储在一起，从而允许快速读取、处理和聚合特定的列数据，而不需要加载整个数据集。另外列式存储对数据压缩更为友好，由于同一列中的数据类型相同，且往往具有一定的相关性，因此可以应用更高效的压缩算法。Polars 的内存布局在许多方面反映了 Parquet 文件在磁盘上的布局，这意味着 Polars DataFrame 与 Parquet 数据文件相互转换时所需的数据转换非常少，从而加快了读写速度。）
-  
+
   Polars 读写 Parquet 数据也非常简单：
 
   ```python
   import polars as pl
-  
+
   df = pl.read_parquet("data/path.parquet")
   df = pl.write_parquet("data/path.parquet")
   ```
-  
+
 - 惰性计算与查询优化
 
   Polars 性能的另一个核心是评估代码的方式，Pandas 默认使用 Eager 执行，也就是按照代码编写的顺序执行运算。相比之下，Polars 能够同时执行 Eager 和 Lazy 执行，查询优化器将对所有必需运算求值并制定最有效的代码执行方式，这可能包括重写运算的执行顺序或删除冗余计算。例如，我们要基于列 `Category` 对列 `Number` 进行聚合求平均值，然后将 `Category` 中值 `A` 和 `B` 的记录筛选出来：
   ```python
   import polars as pl
-  
+
   (
       df.group_by("Category")
       .agg(pl.col("Number").mean().alias("Average_Number"))
@@ -58,7 +58,7 @@ Python 在数据处理领域有如今的地位，和 Pandas 的存在密不可�
   )
   ```
   如果表达式是 Eager 执行，则会多余地对整个 DataFrame 执行分组运算，然后按 `Category` 筛选。通过 Lazy 执行，会先经过筛选，并仅对所需数据执行分组运算。
-  
+
 - 表达性 API
 
   最后，Polars 拥有一个极具表达性的 API，基本上你想执行的任何运算都可以用 Polars 方法表达。相比之下，Pandas 中更复杂的运算通常需要作为 `lambda` 表达式传递给 `apply` 方法。`apply` 由于需要逐行遍历 DataFrame 效率很低，而 Polars 能够让你在列级别上通过 SIMD 实现并行。
@@ -147,7 +147,7 @@ df.loc[df["county.name"] == "washington"][["county.name", "state.name"]]
 
 #quote-box[
   Programs must be written for people to read, and only incidentally for
-  machines to execute. \ 
+  machines to execute. \
   —— Hal Abelson #footnote[这是一个引用块脚注]
 ]
 
@@ -188,5 +188,7 @@ df[df$county.name == "washington", c("county.name", "state.name")]
 Polars 和 Tidyverse 的诞生让我想起了我第一份工作时，一位首席工程师告诉我的话：“第一次构建某物时，专注于让它能工作；第二次构建某物时，专注于让它更优雅。” Pandas 和 Base R 都对统计计算领域做出了巨大贡献。它们能很好地工作。而 Polars 和 Tidyverse 作为后继者则更胜一筹，拥有了专注于“优雅”和“流畅”的优势。
 
 正如俗话所说：“历史不会重演，但总会似曾相识。”#footnote[“History doesn’t repeat itself, but it sure does rhyme.”]
+
+#line()
 
 #image("img/tail.jpg", width: 500pt)

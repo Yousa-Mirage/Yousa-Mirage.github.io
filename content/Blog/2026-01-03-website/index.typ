@@ -110,7 +110,7 @@ GitHub Actions 自动部署
 
 - _煮啵煮啵，构建和预览网站听起来好复杂，有没有现成的傻瓜命令呢？_
   - 有的兄弟，有的。我编写了一个 Python 脚本 `build.py`，你只需要打开你前面学到的终端，用你前面安装的 uv 或 Python 运行这俩命令：`uv run build.py build` 和 `uv run build.py preview`。然后你的 Typst 文档就全变成了网页，打开浏览器就能看到你的网站了。
-  
+
 #figure(caption: "构建和预览命令")[#image("编译预览.png", width: 300pt)]
 
 === 像写文档一样写网页

@@ -823,7 +823,7 @@ labels <- if (use_labels) letters[1:3] else NULL
 
 对于 `x <- if (...) ... else ...`，真正值得审查的是每条执行路径，：#strong[条件是否有效，结果是否符合后续需要，副作用是否明确，默认行为是否符合作者意图。]
 
-#html.elem("hr")
+#line()
 
 #quote-block[“万能的宇宙大人啊，告诉我未来会好吗？”]
 #image("世末歌者.webp")

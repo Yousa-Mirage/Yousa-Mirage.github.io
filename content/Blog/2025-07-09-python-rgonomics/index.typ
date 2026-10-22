@@ -76,7 +76,7 @@
 - 其他（Miscellaneous）
   - 环境管理：#link("https://docs.astral.sh/uv/")[uv]
   - 代码质量：#link("https://docs.astral.sh/ruff/")[ruff]
-  
+
 === 用于配置 ...（For setting up）
 
 最初的障碍往往是如何开始——这既包括安装所需的工具，也包括进入一个舒适的集成开发环境 (IDE) 来运行它们。
@@ -111,7 +111,7 @@
 - *可视化*
 
   即使是 R 语言的一些批评者，也不得不承认 ggplot2 在可视化方面的强大之处，无论是其直观渐进的 API，还是它能生成的精美图表。而 #link("https://seaborn.pydata.org/tutorial/objects_interface")[seaborn 的面向对象接口]似乎取得了很好的平衡：它既提供了类似的工作流#link("https://seaborn.pydata.org/whatsnew/v0.12.0.html")[（其灵感来源正是 ggplot2）]，又兼具了作为一个行业标准工具的所有优点。
-  
+
 === 用于沟通 ...（For communication）
 
 历史上，R 和 Python 之间的一条分界线可以被概括为 “Python 擅长与计算机打交道，R 擅长与人打交道”。虽然这种说法部分源于 “R 不是生产级别应用”这类过于简化的看法，但 R 的学术渊源确实促使其在丰富的沟通技术栈上投入巨大，并将分析输出转化为人类可读、可发布的成果。不过如今，这种差距也已开始缩小。
@@ -119,11 +119,11 @@
 - *表格*
 
   R 不乏用于创建精美表格的软件包，而在 Python 领域，无论是在工作流还是结果输出方面历来都略显不足。除非面临来自 Python 原生领域的激烈竞争，我唯一看好的“移植”工具是最近发布的 #link("https://posit-dev.github.io/great-tables/articles/intro.html")[Great Tables] 包。这是 R 语言 #link("https://gt.rstudio.com/")[gt] 包的一个 Pythonic 克隆版。我之所以更愿意推荐它，是因为它由与 R 版本相同的开发者维护（以支持长期的功能对等），由机构而非个人支持（以确保它不是一个昙花一现的业余项目），并且其设计在借鉴 R 的灵感与遵循 Pythonic 实践之间取得了很好的平衡。
-  
+
 - *计算型笔记本*
 
   Jupyter Notebook 在 Python 工作流中被广泛使用，但也备受争议。虽然它能够混合 Markdown 和代码块，但对于新手来说，笔记本会引入新的 Bug；例如，它们难以进行版本控制，并且容易在错误的环境中执行#footnote[这些确实是 Jupyter Notebook 的痛点。]。对于来自 R Markdown 世界的人来说，像 Quarto 这样的纯文本计算型笔记本可能会提供更透明的开发体验#footnote[纯文本工作流是好文明，甚至#link("https://plain-text.co/")[专门有本书]，尽管我个人认为这本书更像是一种癖好。]。虽然 Quarto 允许用户编写更像其前身 `.rmd` 文件的 `.qmd` 文件，但其渲染器也能处理 Jupyter Notebook，从而让有不同偏好的团队成员能够协作#footnote[Quarto 现在也加入了 Typst 编译选项，无需再依赖慢得要死的 Latex。本网站正是完全由 Typst 编译的。]。
-  
+
 === 其他工具 ...（Miscellaneous）
 
 对于那些更偏向“开发者”而非“分析师”的 R 用户来说，还有一些可能有用且熟悉的工具。在我看来，这些工具的优缺点更加多样，但我还是将它们列出以供参考：
@@ -131,9 +131,10 @@
 - *环境管理*
 
   在 Python 中，管理项目级依赖的方式多到令人应接不暇#footnote[pdm、virtualenv、conda、piptools、pipenv、poetry、uv、pixi ... 这些甚至只是冰山一角。]。因此，关于各种功能集的优缺点，也有很多过时的建议。在这里，*uv* 再次如瑞士军刀般脱颖而出。它具有安装速度快、自动更新 `pyproject.toml` 和 `uv.lock` 文件（因此你不需要记住去 `pip freeze`）、从完全解析的环境中独立跟踪主要依赖项（因此你可以干净、彻底地移除不再需要的“依赖的依赖”#footnote[例如，如果你用 `pip install pandas`，除了 Pandas 本身外还会安装 Numpy 等依赖。如果你再运行 `pip uninstall pandas`，只有 Pandas 自身会被卸载，而 Numpy 作为它的依赖则会永远留在环境中。而如果使用 `uv remove pandas`，则会一并移除所有不再需要的依赖的依赖。]）等诸多优点。*uv* 可以作为 pip 的直接替代品，如果为了兼容性需要也可生成 `requirements.txt` 文件。然而，鉴于其爆炸性的人气和符合人体工学的设计，我相信您不会难以说服合作者采纳它。
-  
+
 - *代码质量*
 
   *Ruff*（Astral 公司的另一个项目）提供了一系列代码检查和格式化选项，并为该领域中数量繁多的原子化工具（isort、Black、Flake8 等）提供了一站式解决方案。Ruff 速度极快，还拥有一个很好用的 VS Code 扩展。并且，虽然这类工具通常被认为是更高级的，但我认为代码检查工具可以成为新用户学习最佳实践的绝佳“教练”。#footnote[在 R 中，更现代、更快速的代码检查和格式化工具是 #link("https://posit-dev.github.io/air/")[Air]。]
-  
+
+#line()
 #image("tail.jpg", width: 500pt)

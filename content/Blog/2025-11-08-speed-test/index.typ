@@ -121,7 +121,7 @@ Pandas 比 Tidyverse 快得多，但和几个新工具相比仍然慢得难以�
 #figure(caption: "Pandas with Arrow Backend in Python")[
   ```python
   import pandas as pd  # 必须是 pandas >= 3.0.0
-  
+
   df = pd.read_parquet(FILE_PATH, dtype_backend="pyarrow")
   df_exploded = df[["ID", "year", "concepts"]].explode("concepts")
   year_counts = (
@@ -159,5 +159,7 @@ Tidyverse（或者说 R）并不以速度著称，但也慢得太离谱了。必
 不过工具并无优劣，只有合适不合适之分。Polars 和 DuckDB 并非要取代 Pandas 或 Tidyverse，而是为性能敏感的大数据量场景提供了更优的解决方案，它们的设计理念之一就是为了榨干现代硬件的性能。但我们也不得不承认一个事实，即*数据分析正在面临越发庞大的数据量、更加抽象的数据结构、日益复杂的任务流*，此时新兴工具 Polars 和 DuckDB 的优势也必然会更加明显。
 
 此外，知道为什么慢#footnote[比如 `.apply` 和 `map` 的循环机制，Pandas 默认的 numpy 后端等。]和为什么快#footnote[比如向量化执行、惰性计算和并行处理。]，能帮助我们写出更高效的代码。事实上，我在编写 Pandas 和 Tidyverse 代码时已经有意识地进行过优化了，但很遗憾，我发现 Pandas 无法绕开 `.apply`#footnote[后续使用 arrow 数据后端后使用 `.explode` 进行了更高效的处理，算是另一种解决思路，最终速度为 2s 左右。]，Tidyverse 同样需要依赖自定义匿名函数来逐行处理嵌套列表，对于复杂的数据结构，这两个工具缺乏原生且高效的支持。总而言之，*人生苦短*，我用 Polars 和 DuckDB。数据驱动和人工智能的时代，多学一些、多用一些现代的工具总是好的！
+
+#line()
 
 #image("tail.webp", width: 500pt)

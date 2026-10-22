@@ -17,7 +17,7 @@
   我大概在两年前读到过这篇文章，当时感觉非常有意思，可能是我个人读的第一篇对于 Python 一些细节进行讨论的博客，因此印象非常深刻。现将其翻译、存档在这里。其实这些细节具体有什么作用，可能还真没有什么作用，但至少是有趣的。
 ]
 
-在 2017 年的 PyGotham 大会上，我做了关于#link("https://www.youtube.com/watch?v%3DWd7vcuiMhxU")[“更好的循环”]的演讲。之后有人问了我一个很好的问题：*_迭代器（iterators）是惰性可迭代对象，而 `range` 也是惰性可迭代对象，所以 `range` 是迭代器吗？_*
+在 #link("https://2017.pygotham.org/")[2017 年的 PyGotham 大会]上，我做了关于#link("https://www.youtube.com/watch?v%3DWd7vcuiMhxU")[“更好的循环”]的演讲。之后有人问了我一个很好的问题：*_迭代器（iterators）是惰性可迭代对象，而 `range` 也是惰性可迭代对象，所以 `range` 是迭代器吗？_*
 
 我不记得问我这个问题的人的名字了。但我记得我用“oh I love that question!”回答了他。
 
