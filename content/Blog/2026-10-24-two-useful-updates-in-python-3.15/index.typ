@@ -7,7 +7,7 @@
 
 = Python 3.15 中两个有用的小更新
 
-2026 年 10 月 9 日，Python 正式发布了 3.15 版本。主要更新内容包括引入了显式延迟导入机制 `lazy import`（PEP 810）、新增不可变字典类型 `frozendict`、新增专用哨兵类型 `sentinel`、在推导式中支持解包语法（PEP 798）、将 UTF-8 设为默认文本编码、新增 Tachyon 性能分析器等。
+2026 年 10 月 9 日，Python 正式发布了 3.15 版本。主要更新内容包括引入了显式延迟导入机制 `lazy import`（#link("https://peps.python.org/pep-0810/")[PEP 810]）、新增不可变字典类型 `frozendict`（#link("https://peps.python.org/pep-0814/")[PEP 814]）、新增专用哨兵类型 `sentinel`（#link("https://peps.python.org/pep-0661/")[PEP 661]）、在推导式中支持解包语法（#link("https://peps.python.org/pep-0798/")[PEP 798]）、将 UTF-8 设为默认文本编码（#link("https://peps.python.org/pep-0686/")[PEP 686]）、新增 Tachyon 性能分析器（#link("https://peps.python.org/pep-0799/")[PEP 799]）等。
 
 本文将重点介绍两个小更新：列表推导式支持解包语法，以及用 `re.prefixmatch()` 取代 `re.match()`。
 
@@ -24,7 +24,7 @@ nested_list = [[1, 2], [3, 4], [5, 6]]
 # SyntaxError: iterable unpacking cannot be used in comprehension
 ```
 
-在 Python 3.14 及以下版本中尝试这样的操作时，将会收到 `SyntaxError`。Python 并不支持这种用法。
+在 Python 3.14 及以下版本中尝试这样的操作会发生报错 `SyntaxError`。Python 并不支持这种用法。
 
 而在 Python 3.15 中，#link("https://peps.python.org/pep-0798/")[PEP 798] 引入了在列表推导式内部进行解包的功能（也包括元组、字典、集合和生成器推导式）。因此，现在可以使用这种非常自然的语法来展开嵌套列表、元组、集合、字典了。
 
@@ -36,7 +36,7 @@ nested_list = [[1, 2], [3], [4, 5]]
 # [1, 2, 3, 4, 5]
 ```
 
-解包元组：
+解包元组、构建生成器：
 
 ```python
 nested_tuple = ((1, 2), (3,), (4, 5))
@@ -176,15 +176,13 @@ functools.reduce(operator.ior, dicts, (new_dict := {}))
 
 `operator.iconcat` 对应列表的 `+=`，`operator.ior` 对应集合或字典的 `|=`。`:=` 把初始累加器绑定到 `new_list`、`new_set`、`new_dict`，方便之后查看结果。
 
-== 2. 用 `re.prefixmatch()` 取代 `re.match()`
-
-如果你用过 Python 的正则表达式模块 `re`，你很可能见过或用过 `re.match()`，尽管你可能没有充分理解它实际的行为。
+== 2. 用 `re.prefixmatch()` 替代 `re.match()`
 
 Python 3.15 正式引入了 `re.prefixmatch()`，并将原有的 `re.match()` 标记为“软弃用”（soft deprecated）。之所以是“软弃用”，是因为这并非功能上的弃用和替代，而是一次旨在消除语义歧义的 API 命名调整，是为了符合 Python 之禅中“显式优于隐式”的原则。
 
-具体来说，Python 的 `re.match()` 实际上*只尝试从字符串的起始位置进行匹配*，而*不会搜索整个字符串*。但在许多其他编程语言和正则表达式库中，match 通常表示查找字符串中符合模式的内容，其语义更接近 Python 的 `re.search()`。
+如果你用过 Python 的正则表达式模块 `re`，你很可能见过或用过 `re.match()`，尽管你可能没有充分理解它实际的行为。
 
-例如：
+具体来说，Python 的 `re.match()` 实际上*只尝试从字符串的起始位置进行匹配*，而*不会搜索整个字符串*。但在许多其他编程语言和正则表达式库中，match 通常表示查找字符串中符合模式的内容，其语义更接近 Python 的 `re.search()`。
 
 ```python
 import re
