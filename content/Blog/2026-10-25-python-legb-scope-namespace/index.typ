@@ -1,8 +1,10 @@
 #import "../index.typ": template, tufted
 #show: template.with(
   title: "Python 的 LEGB 规则：作用域与命名空间",
+  author: "Stephen Gruppetta",
   date: datetime(year: 2026, month: 10, day: 25),
   description: "从局部、嵌套、全局到内置作用域，理解 Python 的变量查找顺序，以及 for 循环、列表推导式和 nonlocal 的作用域差异。",
+  extra-info: [译者：#link("https://github.com/Yousa-Mirage")[天然純真]],
 )
 
 = Python 的 LEGB 规则：作用域与命名空间
