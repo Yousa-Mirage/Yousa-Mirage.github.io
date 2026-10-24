@@ -6,6 +6,11 @@
 == 2026
 
 #tufted.blog-entry(
+  date: datetime(year: 2026, month: 10, day: 25),
+  path: "2026-10-25-python-legb-scope-namespace/",
+  title: "Python 的 LEGB 规则：作用域与命名空间",
+)
+#tufted.blog-entry(
   date: datetime(year: 2026, month: 10, day: 24),
   path: "2026-10-24-two-useful-updates-in-python-3.15/",
   title: "Python 3.15 中两个有用的更新",
