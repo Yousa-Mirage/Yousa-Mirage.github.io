@@ -5,7 +5,7 @@
   description: "Python 3.15 的两个小更新：列表推导式支持解包语法，以及用 re.prefixmatch() 取代 re.match()。",
 )
 
-= 两个有用的小更新
+= Python 3.15 中两个有用的小更新
 
 2026 年 10 月 9 日，Python 正式发布了 3.15 版本。主要更新内容包括引入了显式延迟导入机制 `lazy import`（PEP 810）、新增不可变字典类型 `frozendict`、新增专用哨兵类型 `sentinel`、在推导式中支持解包语法（PEP 798）、将 UTF-8 设为默认文本编码、新增 Tachyon 性能分析器等。
 
