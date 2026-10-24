@@ -82,7 +82,7 @@ outer()
 
 == 嵌套函数：E（Enclosing）
 
-嵌套函数会多出一层“外层函数作用域”。如果内层函数找不到某个名字，它会先到外层函数里找。Enclosing 作用域只在嵌套函数中出现：如果函数定义在模块顶层，它就没有 E 这一层。
+嵌套函数会多出一层“外层函数作用域”。如果内层函数找不到某个名字，它会先到外层函数里找。Enclosing 作用域只在*嵌套函数*中出现：如果函数定义在模块顶层，它就没有 E 这一层。
 
 ```python
 name = "全局"
@@ -163,6 +163,116 @@ print("这行会失败")
 
 这也是为什么不应该用 `print`、`len`、`list` 这类内置名字做变量名。
 
+== 类的作用域：一个特殊的存在
+
+函数和类都会创建自己的作用域，但类的作用域和函数不一样。类执行时会创建一个新的命名空间；类中定义的名字会成为类属性。但这个命名空间不会自动成为方法的 Enclosing 作用域。
+
+=== 类有自己的命名空间
+
+```python
+class Demo:
+    a = 1
+    b = a + 1
+
+print(Demo.a, Demo.b)  # 1 2
+```
+
+类从上到下执行一次，`a`、`b` 都进入类的命名空间，成为类属性。类内部可以读取前面已经定义的名字，因此 `b = a + 1` 能正常工作。
+
+类也能读取外层作用域的名字：
+
+```python
+base = 10
+
+class Demo:
+    value = base + 1
+
+print(Demo.value)  # 11
+```
+
+如果类定义在函数里，它同样可以读取外层函数的变量：
+
+```python
+def make_class():
+    base = 1
+
+    class Demo:
+        value = base + 1
+
+    return Demo
+
+print(make_class().value)  # 2
+```
+
+=== 方法不会把类作用域当作 Enclosing
+
+这是类作用域最容易被误解的地方。方法里的名字查找仍然遵循 L → E → G → B，但这里的 E 是外层的*函数*，而不是所在的类。
+
+```python
+class Demo:
+    class_value = 1
+
+    def get(self):
+        return class_value
+
+Demo().get()
+# NameError: name 'class_value' is not defined
+```
+
+显然 `get()` 的局部没有 `class_value`，它会去找外层*嵌套函数*（这里没有），再找全局（没有），最后找内置（没有）。类命名空间不在它的查找链里。
+
+要访问类属性，必须通过实例或类：
+
+```python
+class Demo:
+    class_value = 1
+
+    def get(self):
+        return self.class_value
+
+print(Demo().get())  # 1
+```
+
+也可以写 `Demo.class_value`；用 `self.class_value` 则会先查实例属性，再查类属性。
+
+=== 嵌套类也看不到外层类的名字
+
+同样的规则适用于嵌套类：
+
+```python
+class Outer:
+    outer_value = 1
+
+    class Inner:
+        inner_value = outer_value
+
+Outer.Inner.inner_value
+# NameError: name 'outer_value' is not defined
+```
+
+`Inner` 的类不能把 `Outer` 的类命名空间当作 Enclosing。要引用外层类的属性，需要写 `Outer.outer_value`。
+
+=== 类里的 nonlocal 指向哪里？
+
+如果类定义在函数里，类里的 `nonlocal` 指向外层函数，而不是类本身：
+
+```python
+def make_class():
+    value = 1
+
+    class Demo:
+        nonlocal value
+        value = 2
+
+    return Demo, value
+
+print(make_class()[1])  # 2
+```
+
+类可以用 `nonlocal` 修改外层函数的变量；但类中的方法不会因此获得类作用域，方法里的 `nonlocal` 仍然指向函数层。
+
+总之，类有自己的命名空间，类中的赋值会成为类属性。类作用域不是方法的 Enclosing，方法里不能直接使用类变量，必须通过 `self.attr`、`cls.attr` 或 `Class.attr`。类作用域更像“类定义执行时使用的一块命名空间”，而不是函数那种会参与闭包捕获的外层作用域。
+
 == 作用域和命名空间
 
 作用域回答的是“这个名字在哪儿可见”，命名空间回答的是“当前有哪些名字，以及它们指向什么对象”。命名空间本质上是一个从名字到对象的映射。
@@ -185,11 +295,11 @@ outer()
 
 `locals()` 返回当前局部命名空间中的名字。`inner()` 只有 `name`，`outer()` 则有 `name` 和 `inner`。
 
-模块也有自己的命名空间。`import random` 之后通过 `random.randint` 访问，`from random import randint` 则会把 `randint` 直接放进当前全局命名空间。类同样有自己的命名空间；类体是独立的作用域，但方法内部不会自动把类变量当作外层变量，访问类属性仍然要通过类名或 `self`。
+模块也有自己的命名空间。`import random` 之后通过 `random.randint` 访问，`from random import randint` 则会把 `randint` 直接放进当前全局命名空间。类同样有自己的命名空间；类是独立的作用域，但方法内部不会自动把类变量当作外层变量，访问类属性仍然要通过类名或 `self`。
 
-== 不是所有缩进块都有作用域
+== 边缘情况
 
-Python 里有一些缩进块不会创建新的作用域，最典型的是 `for`、`if` 和 `while`。
+ 并不是所有缩进块都会创建新的作用域，例如 `for`、`if`、`while`、`try`、`with`等：
 
 ```python
 name = "全局"
@@ -207,11 +317,9 @@ print("if 块外：", inside)  # if 块里定义的
 
 循环变量 `name` 覆盖了外层的同名变量；`if` 块里定义的 `inside` 在块外仍然可见。它们都处于当前作用域，而不是各自拥有一个作用域。
 
-函数、类和推导式则会创建自己的作用域。这种区别在处理循环变量和临时变量时很重要。
+函数、类和*推导式*则会创建自己的作用域。这种区别在处理循环变量和临时变量时很重要。
 
-== 列表推导式有自己的作用域
-
-和普通的 `for` 循环不同，列表推导式有自己的作用域，推导式里的循环变量不会泄漏到外部。
+这里值得注意的是，和普通的 `for` 循环不同，列表推导式有自己的作用域，推导式里的循环变量不会泄漏到外部。
 
 ```python
 name = "全局"
@@ -220,8 +328,6 @@ values = [f"第 {name} 次" for name in range(3)]
 print("列表：", values)   # ['第 0 次', '第 1 次', '第 2 次']
 print("推导式后：", name) # 全局
 ```
-
-如果把这里换成普通的 `for name in range(3)`，外层的 `name` 就会被改成 `2`。列表推导式不会。
 
 == 总结
 
