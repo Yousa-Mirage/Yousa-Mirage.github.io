@@ -13,7 +13,9 @@ build/
 uv.lock
 
 # IDE
-.vscode/
+.vscode/*
+!.vscode/settings.json
+.zed/settings.json
 *.swp
 *.swo
 
@@ -23,6 +25,7 @@ biome.json
 # build outputs
 _site/
 target/
+tufted-lib/*.pdf
 
 # temp files
 *.tmp
