@@ -51,7 +51,7 @@ document no_quarto="false":
     @if [ "{{ no_quarto }}" != "true" ]; then (cd docs && quarto render); fi
 ```
 
-这个命令用于更新规则列表、文档和网站。最初每次都需要依次运行 `Rscript docs/make_docs.R` 和 `quarto render`，其中 `quarto render` 会花费几分钟时间构建网站。#link("https://github.com/Yousa-Mirage")[\@Yousa-Mirage] 和 #link("https://github.com/mattkerlogue")[\@Matt Kerlogue] 进行了#link("https://github.com/etiennebacher/jarl/issues/703")[相关的讨论]，随后 #link("https://github.com/Yousa-Mirage")[@Yousa-Mirage] 添加了 `--no-quarto` 选项。
+这个命令用于更新规则列表、文档和网站。最初每次都需要依次运行 `Rscript docs/make_docs.R` 和 `quarto render`，其中 `quarto render` 会花费几分钟时间构建网站。#link("https://github.com/Yousa-Mirage")[\@Yousa-Mirage] 和 #link("https://github.com/mattkerlogue")[\@Matt Kerlogue] 进行了#link("https://github.com/etiennebacher/jarl/issues/703")[相关的讨论]，随后 #link("https://github.com/Yousa-Mirage")[\@Yousa-Mirage] 添加了 `--no-quarto` 选项。
 
 `no_quarto` 选项默认值为 `false`。如果你在终端里运行 `just document`，就会像之前一样执行所有命令，包括 Quarto 渲染；如果你运行 `just document --no-quarto`，就会跳过 Quarto 渲染，只生成规则文档，从而极大缩短了调试时间。
 

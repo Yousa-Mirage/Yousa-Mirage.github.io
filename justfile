@@ -5,18 +5,6 @@ default: build
 build *args:
     @uv run build.py build {{ args }}
 
-# Build only HTML files. Usage: just html [-f/--force]
-html *args:
-    @uv run build.py html {{ args }}
-
-# Build only PDF files. Usage: just pdf [-f/--force]
-pdf *args:
-    @uv run build.py pdf {{ args }}
-
-# Only copy static assets
-assets:
-    @uv run build.py assets
-
 # Clean the generated _site directory
 clean:
     @uv run build.py clean
@@ -25,6 +13,8 @@ clean:
 preview port="8000":
     @uv run build.py preview --port {{ port }}
 
-# Start preview server without automatically opening the browser
-preview-quiet port="8000":
-    @uv run build.py preview --port {{ port }} --no-open
+# Commit changes with a custom message
+commit message:
+    @jj commit -m "{{ message }}"
+    @jj bookmark set main -r @-
+    @jj git push --bookmark main
