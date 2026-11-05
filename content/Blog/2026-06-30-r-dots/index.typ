@@ -96,6 +96,36 @@ lapply(list(c(1, 2, NA), c(4, 5, 6)), mean, na.rm = TRUE)
 #> [1] 5
 ```
 
+== 直接访问 `...` 里的元素
+
+用法一的 `peek_dots()` 为了打印全部参数，用了 `list(...)`。如果你只需要参数的名字、个数，或者其中的某一个，就不必先构造整个列表。R 4.1.0 及更新版本引入了 `...names()`、`...length()`、`..2` 和 `...elt(i + 1)` 这样的直接访问 `...` 里元素的语法。
+
+例如，以前需要写：
+
+```r
+f <- function(...) {
+  names(list(...)) # 获取参数名
+  length(list(...)) # 获取参数个数
+  list(...)[[2L]] # 访问第二个参数
+  list(...)[[i + 1]] # 访问第 i+1 个参数
+}
+```
+
+在 R 4.1.0 及更新版本中， 推荐改成：
+
+```r
+f <- function(...) {
+  ...names() # 获取参数名
+  ...length() # 获取参数个数
+  ..2 # 访问第二个参数
+  ...elt(i + 1) # 访问第 i+1 个参数
+}
+```
+
+这样写除了更短、更清晰外，还能避免意外求值和内存分配。`list(...)` 会求值所有参数并分配一个列表；而 `...length()` 和 `...names()` 只读取元信息，不会强制求值；`..n` 和 `...elt(n)` 也只求值你真正要用的那个参数。参数很多，或者某个参数的求值有副作用时，这个差别便很重要。
+
+针对这个写法，我在 Jarl 中引入了新规则 `dots_access`#footnote[#link("https://github.com/etiennebacher/jarl/pull/767")[PR 767]]。在 R 4.1.0 及以上版本中，它会自动报告并修复这些 `list(...)` 写法。
+
 == 一个设计模式：把 `...` 放在必填参数之后
 
 接下来是在设计现代函数 API 时更有用处的功能。大多数函数都有两类参数：
@@ -128,15 +158,17 @@ summarise_col <- function(data, column, ..., digits = 2, show_na = TRUE) {
 }
 ```
 
-这样，`...` 后面的所有参数都只能通过参数名传入：
+这样，`...` 后面的所有参数都只能通过完整的参数名传入：
 
 ```r
 # 这会立刻报错，并给出清楚的提示：
 summarise_col(mtcars, "mpg", 3, FALSE)
+
 #> Error in `summarise_col()`:
 #> ! `...` must be empty.
-#> ✖ Problematic argument:
+#> ✖ Problematic arguments:
 #> • ..1 = 3
+#> • ..2 = FALSE
 #> ℹ Did you forget to name an argument?
 
 # 这是正确写法，也更容易阅读：
