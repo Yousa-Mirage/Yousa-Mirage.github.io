@@ -27,7 +27,7 @@ lint:
 
 然后就可以在终端里调用 `just lint`。对于代码检查、格式化和测试等重复性任务，这种方式比直接在终端里敲命令要方便得多。
 
-我之前已经在 #link("https://tidypolars.etiennebacher.com/")[tidypolars] 中使用 Just 了。这个项目的测试套件有数千个测试，通常要跑两三分钟；不过 #link("https://github.com/Yousa-Mirage")[\@Yousa-Mirage] 给了一个很棒的建议：在 `justfile` 里加上下面这条规则：
+我之前已经在 #link("https://tidypolars.etiennebacher.com/")[tidypolars] 中使用 Just 了。这个项目的测试套件有数千个测试，通常要跑两三分钟；不过 #link("https://github.com/Yousa-Mirage")[\@Yousa-Mirage]#footnote[也就是我，嗯嗯。] 给了一个很棒的建议：在 `justfile` 里加上下面这条规则：
 
 ```just
 test filter="":

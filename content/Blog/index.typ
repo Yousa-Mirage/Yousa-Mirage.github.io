@@ -6,6 +6,11 @@
 == 2026
 
 #tufted.blog-entry(
+  date: datetime(year: 2026, month: 11, day: 5),
+  path: "2026-11-05-python-r-clis/",
+  title: "Python 与 R 中的 CLI 工具对比",
+)
+#tufted.blog-entry(
   date: datetime(year: 2026, month: 10, day: 25),
   path: "2026-10-25-python-legb-scope-namespace/",
   title: "Python 的 LEGB 规则：作用域与命名空间",
