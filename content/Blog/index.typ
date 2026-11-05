@@ -7,8 +7,8 @@
 
 #tufted.blog-entry(
   date: datetime(year: 2026, month: 11, day: 5),
-  path: "2026-11-05-python-r-clis/",
-  title: "Python 与 R 中的 CLI 工具对比",
+  path: "2026-11-05-modern-python-r-tools/",
+  title: "Python 与 R 工具介绍",
 )
 #tufted.blog-entry(
   date: datetime(year: 2026, month: 10, day: 25),
