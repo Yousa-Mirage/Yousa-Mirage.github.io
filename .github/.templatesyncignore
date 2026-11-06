@@ -1,13 +1,13 @@
 # User-owned site content and site-wide config
 content/
 config.typ
+.gitignore
 
 # User-owned styling / branding
 assets/custom.css
 assets/favicon.ico
 
 # Documentation
-.github/workflows/update.yml
 CNAME
 LICENSE
 README.md
