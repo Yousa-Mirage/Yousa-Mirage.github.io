@@ -56,7 +56,7 @@ futurize_supported_functions("base")
 
 其实在我刚学 R 还没有接触到 `future` 时，我是靠多开 RStudio 来手动并行的。。。而现在已经有 `futurize()` 这种极方便的魔法并行函数了，并行就方便了太多太多 :D
 
-#quote-block[
+#quote(attribution: "——《我想要太多太多》")[
   我想要太多太多 灿如朝日\
   光芒透入方寸鱼池\
   追光而去上浮便知\
