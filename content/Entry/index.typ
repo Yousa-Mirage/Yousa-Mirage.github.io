@@ -8,7 +8,7 @@
 #tufted.blog-entry(
   date: datetime(year: 2026, month: 11, day: 6),
   path: "2026-11-06-dream-diary/",
-  title: "梦日记",
+  title: "“梦日记”",
 )
 #tufted.blog-entry(
   date: datetime(year: 2026, month: 9, day: 7),
