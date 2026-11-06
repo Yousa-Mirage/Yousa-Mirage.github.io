@@ -4,6 +4,14 @@ CUSTOM STYLES
 Add your custom CSS styles here to override or extend the default styles.
 *******************************************************************************/
 
+/* 略微增加正文段落和列表的行间距 */
+p,
+ul,
+ol,
+dl {
+    line-height: 2.4rem;
+}
+
 /* 刘建毛草字体 */
 @font-face {
     font-family: 'LiuJianMaoCao';
