@@ -8,7 +8,7 @@
 #tufted.blog-entry(
   date: datetime(year: 2026, month: 11, day: 5),
   path: "2026-11-05-modern-python-r-tools/",
-  title: "Python 与 R 工具介绍",
+  title: "我最喜欢的 Python 与 R 现代工具",
 )
 #tufted.blog-entry(
   date: datetime(year: 2026, month: 10, day: 25),

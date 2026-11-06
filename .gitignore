@@ -33,6 +33,8 @@ tufted-lib/*.pdf
 *.bak
 .DS_Store
 Thumbs.db
+test.py
+test.R
 
 # Logs
 *.log
