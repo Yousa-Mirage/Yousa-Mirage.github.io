@@ -1,4 +1,5 @@
 #import "../index.typ": template, tufted
+#import "@preview/theorion:0.6.0": quote-block
 #show: template.with(
   title: "我最喜欢的 Python 与 R 现代工具",
   author: "天然純真",
@@ -12,19 +13,57 @@
 
 这篇文章我来介绍一些自己很喜欢的现代化工具，无一例外都是我经常使用的。希望能帮助读者沙里淘金，找到适合自己的工具，更新自己的工具箱，让自己工作更加高效。
 
-== 数据处理与计算
+== 1. 数据处理与计算
 
-首先，还是先介绍数据处理包。R 的 #link("https://tidyverse.org/")[Tidyverse] 已经不用多介绍了，只要是数据量不大的数据分析任务，依然是第一选择。对于高性能计算，和 Ben Schneider 写的一样，我自己的推荐中也有 Polars 和 DuckDB。但我会新介绍 R 的新并行包 futurize 和数据文件格式 Parquet。
+首先，还是先介绍数据处理包。R 的 #link("https://tidyverse.org/")[Tidyverse] 已经不用多介绍了，只要是数据量不大的数据分析任务，依然是第一选择。对于高性能计算，和 Ben Schneider 写的一样，我自己的推荐中也有 Polars 和 DuckDB。但我会多介绍 R 的新并行包 futurize 和数据文件格式 Parquet。
 
-=== Polars
+=== 1.1 futurize (R)
 
-=== DuckDB
+第一个要介绍的是 #link("https://futurize.futureverse.org/")[futurize] 包。这是一个 R 语言的并行计算工具包，2026 年 1 月 22 日首次提交到 CRAN，看名字就知道也是 futureverse 的一部分。它建立在 future 生态之上，能够通过一个魔法函数 `futurize()` 简单地并行化常用函数。
 
-=== futurize (R)
+```r
+# 安装 futureverse
+# pak::pak("futureverse")
 
-futurize 是 2026 年 1 月 22 日首次发布的 R 并行计算工具包。虽然本质还是 future 包，但
+library(futurize)
+plan(multisession) # once, at the top of your script
 
-=== Parquet
+ys <- lapply(xs, fcn)
+ys <- lapply(xs, fcn) |> futurize() # run in parallel
+
+ys <- xs |> map(fcn)
+ys <- xs |> map(fcn) |> futurize() # run in parallel
+
+ys <- foreach(x = xs) %do% slow_fcn(x)
+ys <- foreach(x = xs) %do% slow_fcn(x) |> futurize() # run in parallel
+
+b <- boot(city, ratio, R = 999)
+b <- boot(city, ratio, R = 999) |> futurize() # run in parallel
+```
+
+没错，并行变得如此简单。无论你使用 baseR 的 `lapply()`、tidyverse 的 `purrr::map_*()` 还是 foreach 的 `%do%`，都不需要改变编程风格或采用新的函数。唯一需要的就是写一个管道符 `|>` 和一个函数 `futurize()`。
+
+`futurize()` 本质是在内部将计算重新使用 `future` 并行化，因此“只是”一层包装、转译而已。但这一层包装就让
+
+futurize 包支持转译来自多个包的函数。可以用 `futurize_supported_packages()` 查询支持的包；可以用 `futurize_supported_functions(package)` 查询特定软件包支持哪些函数。
+
+```r
+# 查看 base 包支持的函数
+futurize_supported_functions("base")
+#>  [1] ".mapply"   "apply"     "by"        "eapply"    "Filter"    "lapply"   
+#>  [7] "Map"       "mapply"    "replicate" "sapply"    "tapply"    "vapply"
+```
+
+其实在我刚学 R 还没有接触到 `future` 时，我是靠多开 RStudio 来手动并行的。。。而现在已经有 `futurize()` 这种极方便的魔法并行函数了，并行就方便了太多太多 :D
+
+#quote-block[
+  我想要太多太多 灿如朝日\
+  光芒透入方寸鱼池\
+  追光而去上浮便知\
+  幸福遍布人世
+]
+
+=== 1.2 Parquet
 
 #link("https://parquet.apache.org/")[Parquet] 是一种开源的列式存储格式，现在由 Apache 基金会维护。它是为分析型工作负载设计的二进制数据格式：数据按列而不是按行存储，每列可以独立编码、压缩和读取。
 
@@ -69,7 +108,13 @@ COPY (SELECT * FROM 'data.csv') TO 'data.parquet';
 
 不过 Parquet 也不是万能的。它适合“一次写入、多次读取”的分析型数据；如果你需要手动修改单元格、要让人直接打开看，或者数据只有几百行，CSV/Excel 则更合适。
 
-== 代码检查与格式化
+=== 1.3 Polars
+
+这是本号的老朋友了，是博主的心头之好。自从用了 Polars 后，我的
+
+=== 1.4 DuckDB
+
+== 2. 代码检查与格式化
 
 格式化工具负责调整代码的布局。格式化不会改变代码的含义；它们只确保空格、换行符和其他标点符号符合一系列规则和标准。Ruff、Air 等格式化工具会自动强制你编写清晰易读的代码，代码宽度适中，语法元素之间留有适当的空间。有了代码格式化工具的辅助，编写代码的过程会大大改善，因为你不再需要过多考虑代码风格——格式化工具会为你完成这项工作。
 
@@ -77,7 +122,7 @@ COPY (SELECT * FROM 'data.csv') TO 'data.parquet';
 
 这里不再介绍那些生态中的传统工具，而是介绍我自己每天都在使用的现代化工具：Python 的 `ruff`、`ty`，R 的 `air`、`jarl`。
 
-=== Ruff (Python)
+=== 2.1 Ruff (Python)
 
 #link("https://docs.astral.sh/ruff/")[`ruff`] 是由 Astral 公司开发的 Python 代码检查与格式化工具。用于替代 `black` 等传统工具。其检查速度极快，单二进制文件，只需要 `ruff check .` 即可检查项目中的全部 Python 文件，使用 `ruff format .` 即可格式化全部 Python 文件。其内置了 900 多条稳定规则，覆盖 Flake8、isort 等传统 linter 的常见检查；`ruff format` 则与 Black 高度兼容。
 
@@ -153,7 +198,7 @@ def _make_ssl_transport(
 
 推荐在 VS Code 中安装 `ruff` 扩展来使用它，Positron 则已经内置了 `ruff` 支持。
 
-=== ty (Python)
+=== 2.2 ty (Python)
 
 近年来 Python 的一大趋势是类型注解。尽管 Python 是一门动态类型语言，但动态类型不等于没有类型。显式类型注解有助于提供更丰富的信息，让工具进行更好的补全，也有助于减少代码中的错误。推荐尽可能多的在 Python 脚本中编写类型注解和注释。
 
@@ -200,7 +245,7 @@ info: Function defined here
 
 与 `ty` 类似的新检查工具还有 Meta 公司开发的 #link("https://pyrefly.org")[`pyrefly`]，其已经实现了正式版，对 beta 版有生产顾虑的读者可以考虑 `pyrefly`。Positron 预置了 `pyrefly` 扩展，但我个人则会卸载它并安装 `ty`。
 
-=== Air (R)
+=== 2.3 Air (R)
 
 #link("https://posit-dev.github.io/air/")[Air] 是 Posit 公司开发的新一代 R 语言格式化工具。速度极快、单二进制文件，只需要 `air format .` 即可格式化项目中的全部 R 文件。Air 是 styler 的后继者。纯 `.R` 项目可以直接换用 Air；VS Code/Positron 里的 Quarto R 单元格也能通过 Quarto 扩展调用 Air。
 
@@ -234,7 +279,7 @@ fn <- function(this,
 
 除了命令行中，还可以安装 VS Code 插件来使用 Air。Positron 则已经默认集成了 Air，可开箱即用。如果在 RStudio 中，则需要配置外部命令行工具。
 
-=== Jarl (R)
+=== 2.4 Jarl (R)
 
 #link("https://jarl.etiennebacher.com")[Jarl] 是 Etienne Bacher 开发的新一代 R 代码静态检查工具，用来查找编程错误、漏洞和可疑的代码模式，并尽可能提供自动修复。其检查规则大量来自 #link("https://lintr.r-lib.org/")[lintr]，目前已有约 90 条规则。相比于 `lintr`，Jarl 的检查速度极快、使用更友好。只需要 `jarl check .` 命令即可检查项目中所有 R 文件中的问题代码。
 
@@ -295,21 +340,21 @@ Found 4 errors.
 
 笔者为 Jarl 做了大量贡献，推荐在任何 R 项目中使用！
 
-== 环境管理
+== 3. 环境管理
 
 以前，Python 的环境管理绝对中是一个非常麻烦、非常恶心、经常出问题的话题，十几年来涌现了无数的工具试图解决这一问题。而 R 生态由于有 CRAN 的存在，依赖冲突则往往并不是一个严重的问题，对于“环境管理”“依赖管理”“可复现性”往往没有特别重视，`renv` 也足够使用。
 
 然而，随着 `uv` 的横空出世，上述状态得到了戏剧性的逆转。`uv` 以极快的速度席卷了 Python 社区，并且似乎已经成为了那个一统天下的包和项目管理器。项目管理、虚拟环境、依赖管理、Python 版本管理，都被 `uv` 快速、简单地解决了。反而是 R 社区在看到 `uv` 大获成功之后开始反思 R 目前的环境管理工具，并迫切推出了一系列模仿 `uv` 的 Vibe Coding 作品，例如 `uvr`、`rv`、`ir`、`rig proj` 等。这些工具互不相通、互相割裂，有的甚至让人怀疑其代码质量。我会重点介绍三个工具：Python 的 `uv`，R 的 `rig`，以及面向 Conda 的现代化替代 `pixi`。
 
-=== uv (Python)
+=== 3.1 uv (Python)
 
-=== rig (R)
+=== 3.2 rig (R)
 
-=== pixi (Conda)
+=== 3.3 pixi (Conda)
 
 在我看来，对于“Python 环境难配”这个说法#footnote[或者说谣传]，Conda 绝对难辞其咎。Conda 本身重、大、慢，而且其环境配置逻辑也并不符合直觉。小白随便一搜，可能就装上了动辄 10GB+ 的 Anaconda，还可能装上后面对各种入口眼花缭乱完全不知道怎么使用#footnote[我知道有 miniconda，但也不妨碍我讨厌 conda。更准确的说，我讨厌 conda 被装在电脑上的那一坨，而不是 conda 仓库。]。
 
-== 文档工具
+== 4. 文档工具
 
 quarto、typst
 
@@ -319,11 +364,11 @@ quarto+typst 能基本实现实时预览
 
 不再单独讲了
 
-== IDE
+== 5. IDE
 
 下面是我喜欢的 IDE。我自己的日常开发以 Positron 为主，以 Zed 为辅，而 arf 则是一个现代化的 R console。
 
-=== Positron
+=== 5.1 Positron
 
 Positron 有几个新功能
 
@@ -332,11 +377,11 @@ Positron 有几个新功能
  自带的包管理功能
  
 
-=== Zed
+=== 5.2 Zed
 
 Zed 是一个很新的编辑器。
 
-=== arf
+=== 5.3 arf
 
 arf 是 radian 的现代化替代品，速度更快、功能更多、bug 更少。
 
@@ -348,11 +393,11 @@ arf 是 radian 的现代化替代品，速度更快、功能更多、bug 更少
 
 zed 更加轻量，写东西很舒服
 
-== 流程编排与命令整合
+== 6. 流程编排与命令整合
 
 just
 
-== 最佳语言
+== 7. 最佳语言
 
 Rust
 
