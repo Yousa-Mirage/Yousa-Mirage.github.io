@@ -15,8 +15,7 @@ uv.lock
 # IDE
 .vscode/*
 !.vscode/settings.json
-.zed/*
-!.zed/settings.json
+.zed/settings.json
 *.swp
 *.swo
 
@@ -33,8 +32,6 @@ tufted-lib/*.pdf
 *.bak
 .DS_Store
 Thumbs.db
-test.py
-test.R
 
 # Logs
 *.log
