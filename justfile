@@ -19,7 +19,7 @@ preview port="8000":
 commit message:
     @jj commit -m "{{ message }}"
     @jj bookmark set main -r @-
-    @printf '是否推送 main 到远程？[y/N] '; \
+    @printf '{{ GREEN }}是否推送 main 到远程？[y/N]{{ NORMAL }} '; \
         read -r answer || answer=''; \
         case "$answer" in \
             y|Y|yes|YES|Yes) jj git push --bookmark main ;; \
