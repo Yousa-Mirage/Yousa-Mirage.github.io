@@ -299,7 +299,7 @@ outer()
 
 == 边缘情况
 
- 并不是所有缩进块都会创建新的作用域，例如 `for`、`if`、`while`、`try`、`with`等：
+并不是所有缩进块都会创建新的作用域，例如 `for`、`if`、`while`、`try`、`with`等：
 
 ```python
 name = "全局"

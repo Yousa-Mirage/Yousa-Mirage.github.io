@@ -1,3 +1,5 @@
+alias fmt := format
+
 # Default task: full build
 default: build
 
@@ -17,4 +19,13 @@ preview port="8000":
 commit message:
     @jj commit -m "{{ message }}"
     @jj bookmark set main -r @-
-    @jj git push --bookmark main
+    @printf '是否推送 main 到远程？[y/N] '; \
+        read -r answer || answer=''; \
+        case "$answer" in \
+            y|Y|yes|YES|Yes) jj git push --bookmark main ;; \
+            *) printf '已跳过 push。\n' ;; \
+        esac
+
+# Format all typst files with typstyle
+format:
+    @typstyle -l 120 -i .

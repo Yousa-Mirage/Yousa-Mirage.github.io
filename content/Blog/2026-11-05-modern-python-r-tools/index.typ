@@ -373,9 +373,9 @@ quarto+typst 能基本实现实时预览
 Positron 有几个新功能
 
 重写的笔记本支持
- quarto 的内联输出
- 自带的包管理功能
- 
+quarto 的内联输出
+自带的包管理功能
+
 
 === 5.2 Zed
 
