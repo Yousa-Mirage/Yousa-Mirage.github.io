@@ -23,7 +23,7 @@ commit message:
         read -r answer || answer=''; \
         case "$answer" in \
             y|Y|yes|YES|Yes) jj git push --bookmark main ;; \
-            *) printf '已跳过 push。\n' ;; \
+            *) printf '{{ GREEN }}已跳过 push。\n{{ NORMAL }}' ;; \
         esac
 
 # Format all typst files with typstyle
