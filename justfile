@@ -29,3 +29,7 @@ commit message:
 # Format all typst files with typstyle
 format:
     @typstyle -l 120 -i .
+
+# Watch for changes and rebuild automatically
+watch:
+    @uv run build.py watch
